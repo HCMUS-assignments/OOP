@@ -28,17 +28,17 @@ class ComplexNumber {
         double getImaginary() const;
 
         // operator overloading
-        ComplexNumber operator + (const ComplexNumber &c) const;
+        ComplexNumber operator + (const ComplexNumber c) const;
 
-        ComplexNumber operator - (const ComplexNumber &c) const;
+        ComplexNumber operator - (const ComplexNumber c) const;
 
-        ComplexNumber operator * (const ComplexNumber &c) const;
+        ComplexNumber operator * (const ComplexNumber c) const;
 
-        ComplexNumber operator / (const ComplexNumber &c) const;
+        ComplexNumber operator / (const ComplexNumber c) const;
 
-        bool operator == (const ComplexNumber &c) const;
+        bool operator == (const ComplexNumber c) const;
 
-        bool operator != (const ComplexNumber &c) const;
+        bool operator != (const ComplexNumber c) const;
 
         // friend function
         friend ostream &operator << (ostream &out, const ComplexNumber &c); 
