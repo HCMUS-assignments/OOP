@@ -11,11 +11,11 @@ class ComplexNumber {
         double i;   // imaginary part
     public:
         // constructor
-        ComplexNumber(double r = 0, double i = 0);
-        ComplexNumber(const ComplexNumber &c);
+        ComplexNumber(double r = 0, double i = 0) ;
+        ComplexNumber(const ComplexNumber &c) ;
         
         // destructor
-        ~ComplexNumber();
+        ~ComplexNumber() {};
 
         // methods
 
@@ -27,14 +27,24 @@ class ComplexNumber {
 
         double getImaginary() const;
 
+        double getModun() const;
+
         // operator overloading
         ComplexNumber operator + (const ComplexNumber c) const;
 
+        ComplexNumber operator += (ComplexNumber c);
+
         ComplexNumber operator - (const ComplexNumber c) const;
+        
+        ComplexNumber operator -= (ComplexNumber c);
 
         ComplexNumber operator * (const ComplexNumber c) const;
 
+        ComplexNumber operator *= (ComplexNumber c);
+
         ComplexNumber operator / (const ComplexNumber c) const;
+
+        ComplexNumber operator /= (ComplexNumber c);
 
         bool operator == (const ComplexNumber c) const;
 
