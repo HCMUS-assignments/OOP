@@ -6,5 +6,5 @@ Line: Line.cpp Line.hpp Point.hpp
 	$(CC) -g -c Line.cpp -I.
 
 clean:
-	del *.exe
-	del *.o
+	rm *.exe
+	rm *.o
