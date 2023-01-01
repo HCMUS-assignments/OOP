@@ -34,13 +34,13 @@ void Rectangle::setBottomRight (Point *bottomRight) {
 float Rectangle::getArea () {
     float width = _bottomRight->getX() - _topLeft->getX();
     float height = _topLeft->getY() - _bottomRight->getY();
-    return width * height;
+    return abs(width * height);
 }
 
 float Rectangle::getPerimeter () {
     float width = _bottomRight->getX() - _topLeft->getX();
     float height = _topLeft->getY() - _bottomRight->getY();
-    return 2 * (width + height);
+    return 2 * abs(width + height);
 }
 
 ostream& operator << (ostream& os, const Rectangle* r) {
