@@ -1,0 +1,8 @@
+21120505 Bui Thi Thanh Ngan 22/05/2003 9.425 -> Gioi
+113 abc 11/05/2002 9.575 -> Gioi
+21120000 ahihi 20/03/2023 9.425 -> Gioi
+22 ThanhNgan 21/03/2023 9.925 -> Gioi
+2111 HEhe 21/03/2003 7 -> Kha
+21 haha 22/03/2003 5.125 -> Trung binh
+135 fixed bugs 22/04/2003 4.525 -> Trung binh
+26 buon ngu qa 17/03/2003 6.425 -> Kha
