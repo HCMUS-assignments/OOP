@@ -1,15 +1,19 @@
 CC = g++
 
-main: SinhVien.o QLSinhVien.o
-	$(CC) -o main.exe SinhVien.o QLSinhVien.o
+main: main.o QLSinhVien.o SinhVien.o
+	$(CC) -o main.exe main.o QLSinhVien.o SinhVien.o
 
-QLSinhVien.o: SinhVien.o QLSinhVien.cpp
-	$(CC) -c QLSinhVien.cpp SinhVien.o -I.
+main.o: main.cpp QLSinhVien.h SinhVien.h
+	$(CC) -c main.cpp -I.
 
-SinhVien.o: SinhVien.cpp
+QLSinhVien.o: QLSinhVien.cpp SinhVien.h
+	$(CC) -c QLSinhVien.cpp -I.
+
+SinhVien.o: SinhVien.cpp 
 	$(CC) -c SinhVien.cpp -I.
 
-	
+
+
 clean:
 	rm -f *.o *.exe
 	
