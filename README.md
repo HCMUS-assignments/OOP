@@ -5,4 +5,6 @@
 <li> <a href="./java/docs/theory"> Lectures about oop in java of TDTU </a>  </li>
 <li> <a href="./java/docs/Lab"> Practice labs _ java </a> </li>
 <li> <a href="./cpp/practice"> Practice labs _ cpp </a> </li>
+<li> <a href="./moodle"> Assignments from moodle fit@hcmus </a> </li>
+<li> <a href="./test"> Middle exam and final exam of the previous courses </a> </li>
 </ul>
