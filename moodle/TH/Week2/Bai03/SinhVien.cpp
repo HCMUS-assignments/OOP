@@ -224,7 +224,7 @@ void standardize(char *&s)
 
 istream &operator>>(istream &in, SinhVien &src)
 {
-    cout << "Enter the information of a student following this format: ID - Fullname - Birthday - BT GK CK\n";
+    cout << "Enter the information of a student following this format: ID - Fullname - Birthday(dd/mm/yy) - BT GK CK\n";
 
     // declare a buffer to store the input
     char *pos = new char[100];
@@ -256,12 +256,15 @@ istream &operator>>(istream &in, SinhVien &src)
     in >> src._marks[0] >> src._marks[1] >> src._marks[2];
 
     delete pos;
+    return in;
 }
 
 ostream &operator<<(ostream &os, SinhVien src)
 {
     // ID - Fullname - Birthday - BT GK CK - AVG
     os << src._id << " - " << src._fullname << " - " << src._birthday << " - " << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << " - " << src.avg_mark() << endl;
+
+    return os;
 }
 
 ifstream& operator>>(ifstream &fin, SinhVien& src) {
@@ -299,15 +302,17 @@ ifstream& operator>>(ifstream &fin, SinhVien& src) {
 
     // Marks
     float *marks = new float[3];
-    in >> src._marks[0] >> src._marks[1] >> src._marks[2];
+    in >> src._marks[0] >> src._marks[1] >> src._marks[2] >> src._avg_mark;
 
     delete pos;
     delete line;
+
+    return fin;
 }
 
 ofstream &operator<<(ofstream &fout, SinhVien src)
 {
     // ID - Fullname - Birthday - BT GK CK - AVG
-    fout << src._id << " - " << src._fullname << " - " << src._birthday << " - " << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << " - " << src.avg_mark() << endl;
-
+    fout << src._id << " - " << src._fullname << " - " << src._birthday << " - " << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << " " << src.avg_mark() << endl;
+    return fout;
 }

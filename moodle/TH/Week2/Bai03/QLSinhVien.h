@@ -1,4 +1,5 @@
 #include "SinhVien.h"
+#include <time.h>
 
 #ifndef _QLSINHVIEN_H
 #define _QLSINHVIEN_H
@@ -7,6 +8,7 @@ struct Node
 {
     SinhVien data;
     Node *next;
+    char *classification;
 
 };
 
