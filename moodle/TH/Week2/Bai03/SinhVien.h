@@ -61,6 +61,11 @@ class SinhVien {
 
         float avg_mark();
 
+        // friend functions
+        friend istream& operator>> (istream&, SinhVien& );
+        friend ostream& operator<< (ostream&, SinhVien );
+
+
 
 };
 

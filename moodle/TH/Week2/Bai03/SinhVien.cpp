@@ -9,11 +9,7 @@ SinhVien::SinhVien()
     _birthday = NULL;
     _avg_mark = 0;
 
-    _marks = new float[3];
-    for (int i = 0; i < 3; i++)
-    {
-        _marks[i] = 0;
-    }
+    _marks = NULL;
 }
 
 SinhVien::SinhVien(char *fullname, char *id, char *birthday, float *marks)
@@ -201,6 +197,63 @@ float SinhVien::avg_mark()
 {
     calcAvg();
     return _avg_mark;
+}
+
+// friend functions
+
+// standardize string
+void standardize(char *&s) {
+    if (s == NULL) {
+        return;
+    }
+    int i = 0;
+    while (s[i] == ' ') {
+        i++;
+    }
+    strncpy(s, s + i, strlen(s) - i + 1);
+    i = strlen(s) - 1;
+    while (s[i] == ' ') {
+        i--;
+    }
+    s[i + 1] = '\0';
+}
+
+istream& operator>>(istream& in, SinhVien& src) {
+    cout << "Enter the information of a student following this format: ID - Fullname - Birthday - BT GK CK\n";
+
+    // declare a buffer to store the input
+    char *pos = new char[100];
+
+    // start to split the input
+    // ID
+    in.getline(pos, 100, '-');
+    src.setId(pos);
+    standardize(src._id);
+
+    // Fullname
+    in.getline(pos, 100, '-');
+    src.setName(pos);
+    standardize(src._fullname);
+
+    // Birthday
+    in.getline(pos, 100, '-');
+    src.setBirthday(pos);
+    standardize(src._birthday);
+
+    // check if the next character is a space
+    while (in.peek() == ' ') {
+        in.ignore();
+    }
+
+    // Marks
+    float *marks = new float[3];
+    in >> src._marks[0] >> src._marks[1] >> src._marks[2];
+
+}
+
+ostream& operator << (ostream& os, SinhVien src) {
+    // ID - Fullname - Birthday - BT GK CK - AVG
+    os << src._id << " - " << src._fullname << " - " << src._birthday << " - " << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << " - " << src.avg_mark() << endl;
 }
 
 
