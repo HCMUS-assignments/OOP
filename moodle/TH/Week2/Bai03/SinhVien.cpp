@@ -42,6 +42,7 @@ SinhVien::SinhVien(char *fullname, char *id, char *birthday, float *marks)
 // destructor
 SinhVien::~SinhVien()
 {
+    // cout << "Destructor of SinhVien called.\n";
     delete _fullname;
     delete _id;
     delete _birthday;
@@ -224,7 +225,7 @@ void standardize(char *&s)
 
 istream &operator>>(istream &in, SinhVien &src)
 {
-    cout << "Enter the information of a student following this format: ID - Fullname - Birthday(dd/mm/yy) - BT GK CK\n";
+    cout << "Enter the information of a student following this format: \nID - Fullname - Birthday(dd/mm/yy) - BT GK CK\n";
 
     // declare a buffer to store the input
     char *pos = new char[100];
@@ -233,29 +234,63 @@ istream &operator>>(istream &in, SinhVien &src)
     // ID
     in.getline(pos, 100, '-');
     src.setId(pos);
-    standardize(src._id);
 
     // Fullname
     in.getline(pos, 100, '-');
     src.setName(pos);
-    standardize(src._fullname);
 
     // Birthday
     in.getline(pos, 100, '-');
     src.setBirthday(pos);
+    // cout << "\nsplited ID: " << src._id << endl;
+    // cout << "\nFullname: " << src._fullname << endl;
+    // cout << "\nBirthday: " << src._birthday << endl;
+
+    // standardize the strings
+    standardize(src._id);
+    standardize(src._fullname);
     standardize(src._birthday);
+    // cout << "\nstandardized ID: " << src._id << endl;
+    // cout << "\nFullname: " << src._fullname << endl;
+    // cout << "\nBirthday: " << src._birthday << endl;
 
     // check if the next character is a space
     while (in.peek() == ' ')
     {
         in.ignore();
+        // cout << "\nignore a space" << endl;
     }
 
     // Marks
-    float *marks = new float[3];
-    in >> src._marks[0] >> src._marks[1] >> src._marks[2];
+    src._marks = new float[3];
+    // cout << "\nBefore reading marks\n";
+
+    // split marks from string input
+    float score;
+
+    // BT score
+    in.getline(pos, 100, ' ');
+    score = atof(pos);
+    src._marks[0] = score;
+    // cout << "\nBT score: " << score << endl;
+
+    // GK score
+    in.getline(pos, 100, ' ');
+    score = atof(pos);
+    src._marks[1] = score;
+    // cout << "\nGK score: " << score << endl;
+
+    // CK score
+    in.getline(pos, 100, '\n');
+    score = atof(pos);
+    src._marks[2] = score;
+    // cout << "\nCK score: " << score << endl;
+
+    // cout << "\nAfter reading marks: ";
+    // cout << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << endl;
 
     delete pos;
+    // cout << "\nGet inform from input: done!\n";
     return in;
 }
 
@@ -267,7 +302,8 @@ ostream &operator<<(ostream &os, SinhVien src)
     return os;
 }
 
-ifstream& operator>>(ifstream &fin, SinhVien& src) {
+ifstream &operator>>(ifstream &fin, SinhVien &src)
+{
     // read a line from the file
     char *line = new char[200];
     fin.getline(line, 200, '\n');
@@ -300,9 +336,29 @@ ifstream& operator>>(ifstream &fin, SinhVien& src) {
         in.ignore();
     }
 
-    // Marks
-    float *marks = new float[3];
-    in >> src._marks[0] >> src._marks[1] >> src._marks[2] >> src._avg_mark;
+    // Marks : BT GK CK AVG
+    src._marks = new float[3];
+    float score;
+
+    // BT
+    in.getline(pos, 100, ' ');
+    score = atof(pos);
+    src._marks[0] = score;
+
+    // GK
+    in.getline(pos, 100, ' ');
+    score = atof(pos);
+    src._marks[1] = score;
+
+    // CK
+    in.getline(pos, 100, ' ');
+    score = atof(pos);
+    src._marks[2] = score;
+
+    // AVG
+    in.getline(pos, 100, ' ');
+    score = atof(pos);
+    src._avg_mark = score;
 
     delete pos;
     delete line;
