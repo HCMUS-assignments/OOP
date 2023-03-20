@@ -10,6 +10,11 @@ struct Node
     Node *next;
     char *classification;
 
+    Node () {
+        next = NULL;
+        classification = NULL;
+    }
+
 };
 
 class QLSinhVien

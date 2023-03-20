@@ -11,15 +11,19 @@ QLSinhVien::QLSinhVien()
 // destructor
 QLSinhVien::~QLSinhVien()
 {
+    // cout << "Destructor of QLSinhVien called.\n";
     if (head != NULL)
     {
         Node *temp = head;
         while (temp != NULL)
         {
-            temp = head->next;
-            delete head->classification;
-            head->data.~SinhVien();
-            head = temp;
+            head = head->next;
+            if (temp->classification != NULL)
+            {
+                delete temp->classification;
+            }
+            temp->data.~SinhVien();
+            temp = head;
         }
     }
 }
@@ -38,7 +42,7 @@ void QLSinhVien::write()
     fout.open("DSSV.txt", ios::out);
     if (fout.fail())
     {
-        cout << "\nCan't open file DSSV.txt...\n";
+        cout << "\nCan't open file DSSV.txt..." << endl;
         return;
     }
 
@@ -50,6 +54,7 @@ void QLSinhVien::write()
     }
 
     fout.close();
+    cout << "\nWrite list of students in file DSSV.txt successfully ...\n";
 }
 
 // 4. read list of students from file: mặc định đọc theo định dạng có cả đtb do đề kh đề cập rõ
@@ -58,7 +63,7 @@ void QLSinhVien::read()
     fin.open("DSSV.txt", ios::in);
     if (fin.fail())
     {
-        cout << "Can't open file DSSV.txt ...\n";
+        cout << "Can't open file DSSV.txt ..." << endl;
         return;
     }
     if (head != NULL)
@@ -106,6 +111,7 @@ void QLSinhVien::read()
     // calculate avg score of class
     avgMarkClass = avgMarkClass / size;
     fin.close();
+    cout << "\nRead list of students from file successfully ...\n";
 }
 
 // 5. find the students having the average score less than class's one, then write that list in file
@@ -118,10 +124,12 @@ void QLSinhVien::find()
         {
             avgMarkClass += temp->data.avg_mark();
         }
+        avgMarkClass = avgMarkClass / size;
     }
-    avgMarkClass = avgMarkClass / size;
 
-    fout.open("DSSV_YC5.txt", ios::out);
+    cout << "\nAVG score of class: " << avgMarkClass << endl;
+
+    fout.open("DSSV_badScore.txt", ios::out);
     if (fout.fail())
     {
         cout << " Can't open DSSV_YC5.txt ...\n";
@@ -138,12 +146,14 @@ void QLSinhVien::find()
         temp = temp->next;
     }
     fout.close();
+    cout << "\nWrite list of students having the average score less than class's one in file DSSV_badScore.txt successfully ...\n";
 }
 
 // 6. add a new student in list and update file
 void QLSinhVien::add()
 {
     SinhVien sv;
+    fflush(stdin);
     cin >> sv;
     sv.calcAvg();
 
@@ -175,6 +185,7 @@ void QLSinhVien::add()
     }
     fout << sv;
     fout.close();
+    cout << "\nAdd a new student in list and update file successfully ...\n";
 }
 
 // 7. classify the students
@@ -183,6 +194,7 @@ void QLSinhVien::classify()
     Node *temp = head;
     while (temp != NULL)
     {
+        temp->classification = new char[20];
         if (temp->data.avg_mark() >= 8)
         {
             strcpy(temp->classification, "Gioi\0");
@@ -200,6 +212,7 @@ void QLSinhVien::classify()
         }
         temp = temp->next;
     }
+    cout << "\nFinished classifying ... \n";
 }
 
 // 8. output list of students with classification inf
@@ -213,6 +226,10 @@ void QLSinhVien::output_classification()
     }
 
     Node *temp = head;
+    if (temp->classification == NULL)
+    {
+        classify();
+    }
     while (temp != NULL)
     {
         fout << temp->data.id() << " " << temp->data.fullname() << " " << temp->data.birthday() << " " << temp->data.avg_mark() << " -> "
@@ -220,6 +237,8 @@ void QLSinhVien::output_classification()
         temp = temp->next;
     }
     fout.close();
+
+    cout << "Finished writing list of students with classification inf in file DSSV_classification.txt ... \n";
 }
 
 // 9. find all students having the same birthday with the present day
@@ -234,7 +253,7 @@ void QLSinhVien::findSameBirthday()
     int m = now->tm_mon + 1;
     int y = now->tm_year + 1900;
 
-    // convert dd/mm/yy -> string
+    // convert dd/mm -> string
     char *presentDay = new char[50];
     if (d < 10)
     {
@@ -254,20 +273,23 @@ void QLSinhVien::findSameBirthday()
     {
         sprintf(presentDay + 3, "%d", m);
     }
-    sprintf(presentDay + 5, "/");
-    sprintf(presentDay + 6, "%d", y);
 
     fout.open("DSSV_happyBirthday.txt", ios::out);
-    if (fout.fail()) {
+    if (fout.fail())
+    {
         cout << "Can't open file DSSV_happyBirthday.txt ...\n";
-        return ;
+        return;
     }
     Node *temp = head;
-    while (temp != NULL) {
-        if (strcmp(temp->data.birthday(), presentDay) == 0) {
+    while (temp != NULL)
+    {
+        if (strncmp(temp->data.birthday(), presentDay, 5) == 0)
+        {
             fout << temp->data;
         }
         temp = temp->next;
     }
     fout.close();
+    delete presentDay;
+    cout << "Finished writing list of students having the same birthday with the present day in file DSSV_happyBirthday.txt ...\n";
 }
