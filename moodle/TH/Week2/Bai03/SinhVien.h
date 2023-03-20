@@ -1,4 +1,6 @@
 #include <iostream> 
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 #ifndef _SINHVIEN_H
@@ -63,7 +65,12 @@ class SinhVien {
 
         // friend functions
         friend istream& operator>> (istream&, SinhVien& );
+
         friend ostream& operator<< (ostream&, SinhVien );
+
+        friend ifstream& operator>> (ifstream&, SinhVien& ); 
+
+        friend ofstream& operator<< (ofstream&, SinhVien);
 
 
 

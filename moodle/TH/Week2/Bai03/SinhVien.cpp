@@ -202,23 +202,28 @@ float SinhVien::avg_mark()
 // friend functions
 
 // standardize string
-void standardize(char *&s) {
-    if (s == NULL) {
+void standardize(char *&s)
+{
+    if (s == NULL)
+    {
         return;
     }
     int i = 0;
-    while (s[i] == ' ') {
+    while (s[i] == ' ')
+    {
         i++;
     }
     strncpy(s, s + i, strlen(s) - i + 1);
     i = strlen(s) - 1;
-    while (s[i] == ' ') {
+    while (s[i] == ' ')
+    {
         i--;
     }
     s[i + 1] = '\0';
 }
 
-istream& operator>>(istream& in, SinhVien& src) {
+istream &operator>>(istream &in, SinhVien &src)
+{
     cout << "Enter the information of a student following this format: ID - Fullname - Birthday - BT GK CK\n";
 
     // declare a buffer to store the input
@@ -241,7 +246,8 @@ istream& operator>>(istream& in, SinhVien& src) {
     standardize(src._birthday);
 
     // check if the next character is a space
-    while (in.peek() == ' ') {
+    while (in.peek() == ' ')
+    {
         in.ignore();
     }
 
@@ -249,11 +255,59 @@ istream& operator>>(istream& in, SinhVien& src) {
     float *marks = new float[3];
     in >> src._marks[0] >> src._marks[1] >> src._marks[2];
 
+    delete pos;
 }
 
-ostream& operator << (ostream& os, SinhVien src) {
+ostream &operator<<(ostream &os, SinhVien src)
+{
     // ID - Fullname - Birthday - BT GK CK - AVG
     os << src._id << " - " << src._fullname << " - " << src._birthday << " - " << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << " - " << src.avg_mark() << endl;
 }
 
+ifstream& operator>>(ifstream &fin, SinhVien& src) {
+    // read a line from the file
+    char *line = new char[200];
+    fin.getline(line, 200, '\n');
 
+    // insert line into a stringstream
+    stringstream in(line);
+
+    // declare a buffer to store the input
+    char *pos = new char[100];
+
+    // start to split the input
+    // ID
+    in.getline(pos, 100, '-');
+    src.setId(pos);
+    standardize(src._id);
+
+    // Fullname
+    in.getline(pos, 100, '-');
+    src.setName(pos);
+    standardize(src._fullname);
+
+    // Birthday
+    in.getline(pos, 100, '-');
+    src.setBirthday(pos);
+    standardize(src._birthday);
+
+    // check if the next character is a space
+    while (in.peek() == ' ')
+    {
+        in.ignore();
+    }
+
+    // Marks
+    float *marks = new float[3];
+    in >> src._marks[0] >> src._marks[1] >> src._marks[2];
+
+    delete pos;
+    delete line;
+}
+
+ofstream &operator<<(ofstream &fout, SinhVien src)
+{
+    // ID - Fullname - Birthday - BT GK CK - AVG
+    fout << src._id << " - " << src._fullname << " - " << src._birthday << " - " << src._marks[0] << " " << src._marks[1] << " " << src._marks[2] << " - " << src.avg_mark() << endl;
+
+}
