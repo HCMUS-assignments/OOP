@@ -343,6 +343,10 @@ ListFraction &ListFraction::operator=(const ListFraction &src)
     {
         return *this;
     }
+    if (list_of_fraction != NULL)
+    {
+        delete[] list_of_fraction;
+    }
     size = src.size;
     list_of_fraction = new Fraction[size * sizeof(Fraction)];
     for (int i = 0; i < size; i++)
