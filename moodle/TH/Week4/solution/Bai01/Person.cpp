@@ -10,6 +10,7 @@ Person::Person(long id) : identity(id)
 // constructors
 Person::Person()
 {
+    // cout << "\nconstructor Person called\n";
     identity = 0;
 }
 
@@ -22,6 +23,7 @@ Person::~Person()
 Person::Person(const Person &person)
 {
     identity = person.identity;
+    // cout << "\ncopy constructor Person called\n";
 }
 
 // getter
