@@ -31,6 +31,7 @@ public:
 
     // other methods
     int getSalary();
+    int getProduct_Day();
 
     void enterInfo();
     void printInfo();

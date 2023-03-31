@@ -7,7 +7,7 @@ NVSanXuat::NVSanXuat() : NhanVien()
 }
 NVSanXuat::NVSanXuat(string _id, string _name, string _birthdate, string _address, int _numProduct) : NhanVien(_name, _id, _birthdate, _address)
 {
-    cout << "\nConstructor of NVSanXuat is called.\n";
+    // cout << "\nConstructor of NVSanXuat is called.\n";
     numProduct = _numProduct;
 }
 
@@ -20,7 +20,7 @@ NVSanXuat::~NVSanXuat()
 // copy constructor
 NVSanXuat::NVSanXuat(const NVSanXuat &src)
 {
-    cout << "\nCopy constructor of NVSanXuat is called.\n";
+    // cout << "\nCopy constructor of NVSanXuat is called.\n";
     ID = src.ID;
     FullName = src.FullName;
     Birthdate = src.Birthdate;
@@ -31,7 +31,7 @@ NVSanXuat::NVSanXuat(const NVSanXuat &src)
 // overloading operator =
 NVSanXuat &NVSanXuat::operator=(const NVSanXuat &src)
 {
-    cout << "\nOverloading operator = of NVSanXuat is called.\n";
+    // cout << "\nOverloading operator = of NVSanXuat is called.\n";
     if (this != &src) {
         ID = src.ID;
         FullName = src.FullName;
@@ -79,4 +79,9 @@ void NVSanXuat::printInfo()
     cout << "\nID: " << ID << ", Full name: " << FullName 
     << "\nBirthdate: " << Birthdate << ", Address: " << Address 
     << "\nNumber of products: " << numProduct << ", Salary: " << getSalary() << endl;
+}
+
+int NVSanXuat::getProduct_Day()
+{
+    return numProduct;
 }

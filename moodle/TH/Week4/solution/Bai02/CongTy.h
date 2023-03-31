@@ -47,10 +47,10 @@ class CongTy {
         float avgSalaryOfAll();
 
         // 5. Nhập vào mã, tìm nhân viên tương ứng
-        NhanVien* findEmployeeById();
+        void findEmployeeById();
 
         // 6. Nhập vào tên, tìm nhân viên tương ứng
-        NhanVien* findEmployeeByName();
+        void findEmployeeByName();
 
         // 7. Có bao nhiêu nhân viên sinh trong tháng 5
         int countEmployeeHasBirthdayInMay();

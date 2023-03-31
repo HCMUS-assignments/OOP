@@ -7,7 +7,7 @@ NhanVien::NhanVien()
 }
 NhanVien::NhanVien(string _name, string _id, string _birthdate, string _address)
 {
-    cout << "\nConstructor of NhanVien is called.\n";
+    // cout << "\nConstructor of NhanVien is called.\n";
     FullName = _name;
     ID = _id;
     Birthdate = _birthdate;
@@ -23,7 +23,7 @@ NhanVien::~NhanVien()
 // copy constructor
 NhanVien::NhanVien(const NhanVien &src)
 {
-    cout << "\nCopy constructor of NhanVien is called.\n";
+    // cout << "\nCopy constructor of NhanVien is called.\n";
     FullName = src.FullName;
     ID = src.ID;
     Birthdate = src.Birthdate;
@@ -33,7 +33,7 @@ NhanVien::NhanVien(const NhanVien &src)
 // overloading operator =
 NhanVien& NhanVien ::operator=(const NhanVien &src)
 {
-    cout << "\nOverloading operator = of NhanVien is called.\n";
+    // cout << "\nOverloading operator = of NhanVien is called.\n";
     if (this != &src) {
         FullName = src.FullName;
         ID = src.ID;
@@ -90,5 +90,9 @@ void NhanVien::enterInfo()
 }
 void NhanVien::printInfo()
 {
+    // virtual method
+}
+
+int NhanVien :: getProduct_Day() {
     // virtual method
 }

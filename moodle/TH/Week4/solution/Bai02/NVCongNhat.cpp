@@ -7,7 +7,7 @@ NVCongNhat::NVCongNhat() : NhanVien()
 }
 NVCongNhat::NVCongNhat(string _id, string _name, string _birthdate, string _address, int _numDay) : NhanVien(_name, _id, _birthdate, _address)
 {
-    cout << "\nConstructor of NVCongNhat is called.\n";
+    // cout << "\nConstructor of NVCongNhat is called.\n";
     numDay = _numDay;
 }
 
@@ -20,7 +20,7 @@ NVCongNhat::~NVCongNhat()
 // copy constructor
 NVCongNhat::NVCongNhat(const NVCongNhat &src)
 {
-    cout << "\nCopy constructor of NVCongNhat is called.\n";
+    // cout << "\nCopy constructor of NVCongNhat is called.\n";
     ID = src.ID;
     FullName = src.FullName;
     Birthdate = src.Birthdate;
@@ -31,7 +31,7 @@ NVCongNhat::NVCongNhat(const NVCongNhat &src)
 // overloading operator =
 NVCongNhat &NVCongNhat::operator=(const NVCongNhat &src)
 {
-    cout << "\nOverloading operator = of NVCongNhat is called.\n";
+    // cout << "\nOverloading operator = of NVCongNhat is called.\n";
     if (this != &src) {
         ID = src.ID;
         FullName = src.FullName;
@@ -79,4 +79,9 @@ void NVCongNhat::printInfo()
     cout << "\nID: " << ID << ", Full name: " << FullName 
     << "\nBirthdate: " << Birthdate << ", Address: " << Address 
     << "\nNumber of days: " << numDay << ", Salary: " << getSalary() << endl;
+}
+
+int NVCongNhat :: getProduct_Day()
+{
+    return numDay;
 }

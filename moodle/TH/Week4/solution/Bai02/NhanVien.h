@@ -42,6 +42,7 @@ class NhanVien {
         virtual int getSalary() ;
         virtual void enterInfo();
         virtual void printInfo();
+        virtual int getProduct_Day();
 };
 
 #endif
