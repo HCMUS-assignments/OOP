@@ -2,7 +2,7 @@
 // Constructor
 CongTy::CongTy()
 {
-    dsNV = NULL;
+    head = NULL;
     count = 0;
     sumSalary = 0;
     avgSalary = 0;
@@ -11,10 +11,13 @@ CongTy::CongTy()
 // Destructor
 CongTy::~CongTy()
 {
-    if (dsNV != NULL)
+    if (head != NULL)
     {
-        delete[] dsNV;
-        dsNV = NULL;
+        for (Node *p = head; p != NULL; p = p->pNext)
+        {
+            delete p->data;
+        }
+        head = NULL;
     }
 }
 
@@ -23,18 +26,31 @@ CongTy &CongTy::operator=(const CongTy &other)
 {
     if (this != &other)
     {
-        if (dsNV != NULL)
+        if (head != NULL)
         {
-            delete[] dsNV;
-            dsNV = NULL;
+            for (Node *p = head; p != NULL; p = p->pNext)
+            {
+                delete p->data;
+            }
+            head = NULL;
         }
         count = other.count;
         sumSalary = other.sumSalary;
         avgSalary = other.avgSalary;
-        dsNV = new NhanVien[count];
-        for (int i = 0; i < count; i++)
+        for (Node *p = other.head; p != NULL; p = p->pNext)
         {
-            dsNV[i] = other.dsNV[i];
+            if (p->data->getID().substr(0, 2) == "SX")
+            {
+                NVSanXuat *nvsx = new NVSanXuat();
+                *nvsx = *(NVSanXuat *)p->data;
+                addEmployee(nvsx);
+            }
+            else if (p->data->getID().substr(0, 2) == "CN")
+            {
+                NVCongNhat *nvcn = new NVCongNhat();
+                *nvcn = *(NVCongNhat *)p->data;
+                addEmployee(nvcn);
+            }
         }
     }
     return *this;
@@ -62,10 +78,13 @@ void Standardize(string s) {
 
 void CongTy::read()
 {
-    if (dsNV != NULL)
+    if (head != NULL)
     {
-        delete[] dsNV;
-        dsNV = NULL;
+        for (Node *p = head; p != NULL; p = p->pNext)
+        {
+            delete p->data;
+        }
+        head = NULL;
     }
     count = 0;
 
@@ -97,20 +116,32 @@ void CongTy::read()
         
         if (strncmp(_id.c_str(), "SX", 2) == 0) {
             int num = stoi(_num);
-            NVSanXuat nvsx (_id, _name, _birthdate, _address, num);
+            NVSanXuat *nvsx = new NVSanXuat(_id, _name, _birthdate, _address, num);
             addEmployee(nvsx);
         }
         else {
             int num = stoi(_num);
-            NVCongNhat nvcn(_id, _name, _birthdate, _address, num);
+            NVCongNhat *nvcn = new NVCongNhat(_id, _name, _birthdate, _address, num);
             addEmployee(nvcn);
         }
     }
     fin.close();
+    cout << "\nDa doc du lieu tu file input.txt\n";
 }
 
 // xuất dữ liệu vào file output.txt: gồm:
 // ID - Name - Birthdate - Address - Salary
+
+// chuyền tiền lương sang dạng chuỗi
+string convertSalary (int salary) {
+    string str = to_string(salary);
+    for (int i = str.length() - 3; i >= 0; i -= 3) {
+        if (i > 0) {
+            str.insert(i, ".");
+        }
+    }
+    return str;
+}
 
 void CongTy::write()
 {
@@ -120,41 +151,62 @@ void CongTy::write()
         cout << "\nKhong mo duoc file output.txt";
         return;
     }
-    for (int i = 0; i < count ; i++) {
-        fout << dsNV[i].getID() << " - " << dsNV[i].getFullName() << " - " << dsNV[i].getBirthdate() << " - " << dsNV[i].getAddress() << " - " << dsNV[i].getSalary() << endl;
+    for (Node *p = head; p != NULL; p = p->pNext)
+    {
+        fout << p->data->getID() << " - " << p->data->getFullName() << " - " << p->data->getBirthdate() << " - " << p->data->getAddress() << " - " << convertSalary(p->data->getSalary()) << endl;
     }
     fout.close();
+    cout << "\nDa ghi du lieu vao file output.txt\n";
 }
 
 // 2. Tính tổng tiền lương của tất cả các nhân viên
 int CongTy::sumSalaryOfAll()
 {
-    for (int i = 0; i < count; i++)
-    {
-        sumSalary += dsNV[i].getSalary();
-    }
+    sumSalary = 0;
+    for (Node *p = head; p != NULL; p = p->pNext)
+        sumSalary += p->data->getSalary();
+
     return sumSalary;
 }
 
 // 3. Tìm nhân viên có lương cao nhất
-NhanVien* CongTy::findMaxSalary()
+void CongTy::findMaxSalary()
 {
-    int max = dsNV[0].getSalary();
-    int index = 0;
-    for (int i = 1; i < count; i++)
-    {
-        if (dsNV[i].getSalary() > max)
-        {
-            max = dsNV[i].getSalary();
-            index = i;
+    int maxSalary = 0;
+    for (Node *temp = head; temp != NULL; temp = temp->pNext) {
+        if (temp == head) {
+            maxSalary = temp->data->getSalary();
+        }
+        else {
+            if (temp->data->getSalary() > maxSalary) {
+                maxSalary = temp->data->getSalary();
+            }
         }
     }
-    return dsNV + index;
+
+    // ghi ra danh sách nhân viên có lương cao nhất file listEmployeeWithMaxSalary.txt
+    ofstream fout("listEmployeeWithMaxSalary.txt", ios::out);
+    if (fout.fail())
+    {
+        cout << "\nKhong mo duoc file listEmployeeWithMaxSalary.txt";
+        return;
+    }
+    for (Node *p = head; p != NULL; p = p->pNext)
+    {
+        if (p->data->getSalary() == maxSalary) {
+            fout << p->data->getID() << " - " << p->data->getFullName() << " - " << convertSalary(p->data->getSalary()) << endl;
+        }
+    }
+    cout << "\n Da ghi dsnv co luong cao nhat ra file listEmployeeWithMaxSalary.txt\n";
 }
 
 // 4. Tính lương trung bình trong công ty
 float CongTy::avgSalaryOfAll()
 {
+    if (count == 0) {
+        cerr << "\nKhong co nhan vien nao trong cong ty...\n";
+        return 0;
+    }
     avgSalary = (float)sumSalaryOfAll() / count;
     return avgSalary;
 }
@@ -166,11 +218,11 @@ NhanVien *CongTy::findEmployeeById()
     string id;
     fflush(stdin);
     getline(cin, id);
-    for (int i = 0; i < count; i++)
+    for (Node *p = head; p != NULL; p = p->pNext)
     {
-        if (dsNV[i].getID() == id)
+        if (p->data->getID() == id)
         {
-            return dsNV + i;
+            return p->data;
         }
     }
     cout << "\nKhong ton tai nhan vien ID: " << id << " trong cong ty...\n";
@@ -185,11 +237,11 @@ NhanVien *CongTy::findEmployeeByName()
     fflush(stdin);
     getline(cin, name);
 
-    for (int i = 0; i < count; i++)
+    for (Node *p = head; p != NULL; p = p->pNext)
     {
-        if (dsNV[i].getFullName() == name)
+        if (p->data->getFullName() == name)
         {
-            return dsNV + i;
+            return p->data;
         }
     }
 }
@@ -198,9 +250,9 @@ NhanVien *CongTy::findEmployeeByName()
 int CongTy::countEmployeeHasBirthdayInMay()
 {
     int num = 0;
-    for (int i = 0; i < count; i++)
+    for (Node *p = head; p != NULL; p = p->pNext)
     {
-        if (dsNV[i].getBirthdate().substr(3, 2) == "05")
+        if (p->data->getBirthdate().substr(3, 2) == "05")
         {
             num++;
         }
@@ -209,44 +261,91 @@ int CongTy::countEmployeeHasBirthdayInMay()
 }
 
 // 8. Thêm 1 nhân viên vào danh sách
-void CongTy::addEmployee(NVSanXuat nvsx)
-{
-    if (dsNV == NULL)
-    {
-        dsNV = new NhanVien[1];
+void CongTy:: addEmployee() {
+    cout << "\nNhap thong tin nhan vien can them: ";
+    cout << "\nID: ";
+    string id;
+    fflush(stdin);
+    getline(cin, id);
+    cout << "\nFullname: ";
+    string name;
+    fflush(stdin);
+    getline(cin, name);
+
+    cout << "\nBirthdate: ";
+    string birthdate;
+    fflush(stdin);
+    getline(cin, birthdate);
+
+    cout << "\nAddress: ";
+    string address;
+    fflush(stdin);
+    getline(cin, address);
+
+    if (strncmp(id.c_str(), "SX", 2) == 0) {
+        cout << "\nSo san pham: ";
+        int num;
+        fflush(stdin);
+        cin >> num;
+        NVSanXuat *nvsx = new NVSanXuat(id, name, birthdate, address, num);
+        addEmployee(nvsx);
     }
-    else
-    {
-        NhanVien *temp = new NhanVien[count + 1];
-        for (int i = 0; i < count; i++)
-        {
-            temp[i] = dsNV[i];
-        }
-        delete[] dsNV;
-        dsNV = temp;
+    else {
+        cout << "\nSo ngay lam viec: ";
+        int num;
+        fflush(stdin);
+        cin >> num;
+        NVCongNhat *nvcn = new NVCongNhat(id, name, birthdate, address, num);
+        addEmployee(nvcn);
     }
-    count++;
-    dsNV[count - 1] = nvsx;
+
+    // ghi vào file input.txt
+    ofstream fout("input.txt", ios::app);
+    if (fout.fail()) {
+        cout << "\nKhong mo duoc file input.txt";
+        return;
+    }
+    fout << id << " - " << name << " - " << birthdate << " - " << address << endl;
+
+    cout << "\nDa them nhan vien vao danh sach va cap nhat file input.txt\n";
 }
 
-void CongTy::addEmployee(NVCongNhat nvcn)
+void CongTy::addEmployee(NVSanXuat *&nvsx)
 {
-    if (dsNV == NULL)
-    {
-        dsNV = new NhanVien[1];
-    }
-    else
-    {
-        NhanVien *temp = new NhanVien[count + 1];
-        for (int i = 0; i < count; i++)
-        {
-            temp[i] = dsNV[i];
+    Node *p = new Node;
+    p->data = nvsx;
+    p->pNext = NULL;
+
+    if (head == NULL) {
+        head = p;
+    } else {
+        for (Node *temp = head; temp != NULL; temp = temp->pNext) {
+            if (temp->pNext == NULL) {
+                temp->pNext = p;
+                break;
+            }
         }
-        delete[] dsNV;
-        dsNV = temp;
     }
-    count++;
-    dsNV[count - 1] = nvcn;
+    count ++;
+}
+
+void CongTy::addEmployee(NVCongNhat *&nvcn)
+{
+    Node *p = new Node;
+    p->data = nvcn;
+    p->pNext = NULL;
+
+    if (head == NULL) {
+        head = p;
+    } else {
+        for (Node *temp = head; temp != NULL; temp = temp->pNext) {
+            if (temp->pNext == NULL) {
+                temp->pNext = p;
+                break;
+            }
+        }
+    }
+    count ++;
 }
 
 // 9. Xóa 1 nhân viên khỏi danh sách
@@ -257,19 +356,36 @@ void CongTy::deleteEmployee()
     fflush(stdin);
     getline(cin, id);
 
-    for (int i = 0; i < count; i++)
-    {
-        if (dsNV[i].getID() == id)
-        {
-            for (int j = i; j < count - 1; j++)
-            {
-                dsNV[j] = dsNV[j + 1];
+    for (Node *temp = head; temp != NULL; temp = temp->pNext) {
+        if (temp->data->getID() == id) {
+            if (temp == head) {
+                head = temp->pNext;
+                delete temp;
+                count--;
+                break;
+            } else {
+                Node *p = head;
+                while (p->pNext != temp) {
+                    p = p->pNext;
+                }
+                p->pNext = temp->pNext;
+                delete temp;
+                count--;
+                break;
             }
-            count--;
-            cout << "\nDa xoa nhan vien ID: " << id  << " ra khoi ds ... " << endl;
-            return;
         }
     }
+
+    // cap nhat file input.txt
+    ofstream fout("input.txt", ios::out);
+    if (fout.fail()) {
+        cout << "\nKhong mo duoc file input.txt";
+        return;
+    }
+    for (Node *p = head; p != NULL; p = p->pNext) {
+        fout << p->data->getID() << " - " << p->data->getFullName() << " - " << p->data->getBirthdate() << " - " << p->data->getAddress() << endl;
+    }
+    cout << "\nDa xoa nhan vien va cap nhat file input.txt\n";
 }
 
 // 10. Ghi tất cả các nhân viên có lương nhỏ hơn lương trung bình của công ty lên file 'emp_LowerAvgSalary.dat'
@@ -282,11 +398,15 @@ void CongTy::writeEmployeeLowerAvgSalaryToFile()
         return;
     }
     fout << avgSalaryOfAll() << endl;
-    for (int i = 0; i < count; i++)
+    for (Node *p = head; p != NULL; p = p->pNext)
     {
-        if (dsNV[i].getSalary() < avgSalaryOfAll())
+        if (p->data->getSalary() < avgSalaryOfAll())
         {
-            fout << dsNV[i].getID() << " - " << dsNV[i].getFullName() << " - " << dsNV[i].getSalary() << endl;
+            fout << p->data->getID() << " - " << p->data->getFullName() <<  " - "  << convertSalary(p->data->getSalary()) << endl;
         }
     }
+    cout << "\nDa ghi file emp_LowerAvgSalary.dat\n";
 }
+
+
+

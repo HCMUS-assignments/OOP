@@ -5,7 +5,7 @@ NVCongNhat::NVCongNhat() : NhanVien()
 {
     numDay = 0;
 }
-NVCongNhat::NVCongNhat(string _name, string _id, string _birthdate, string _address, int _numDay) : NhanVien(_name, _id, _birthdate, _address)
+NVCongNhat::NVCongNhat(string _id, string _name, string _birthdate, string _address, int _numDay) : NhanVien(_name, _id, _birthdate, _address)
 {
     cout << "\nConstructor of NVCongNhat is called.\n";
     numDay = _numDay;

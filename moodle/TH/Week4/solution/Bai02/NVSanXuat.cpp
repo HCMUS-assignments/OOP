@@ -5,7 +5,7 @@ NVSanXuat::NVSanXuat() : NhanVien()
 {
     numProduct = 0;
 }
-NVSanXuat::NVSanXuat(string _name, string _id, string _birthdate, string _address, int _numProduct) : NhanVien(_name, _id, _birthdate, _address)
+NVSanXuat::NVSanXuat(string _id, string _name, string _birthdate, string _address, int _numProduct) : NhanVien(_name, _id, _birthdate, _address)
 {
     cout << "\nConstructor of NVSanXuat is called.\n";
     numProduct = _numProduct;

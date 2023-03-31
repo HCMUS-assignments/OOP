@@ -8,9 +8,14 @@
 #include <sstream>
 #include <string.h>
 
+struct Node {
+    NhanVien *data;
+    Node *pNext;
+};
+
 class CongTy {
     private:
-        NhanVien *dsNV;
+        Node *head;
         int count;
         int sumSalary;
         float avgSalary;
@@ -36,7 +41,7 @@ class CongTy {
         int sumSalaryOfAll();
 
         // 3. Tìm nhân viên có lương cao nhất
-        NhanVien* findMaxSalary();
+        void findMaxSalary();
 
         // 4. Tính lương trung bình trong công ty
         float avgSalaryOfAll();
@@ -51,8 +56,9 @@ class CongTy {
         int countEmployeeHasBirthdayInMay();
 
         // 8. Thêm 1 nhân viên vào danh sách
-        void addEmployee(NVSanXuat  nvsx);
-        void addEmployee(NVCongNhat nvcn);
+        void addEmployee();
+        void addEmployee(NVSanXuat  *&nvsx);
+        void addEmployee(NVCongNhat *&nvcn);
 
         // 9. Xóa 1 nhân viên khỏi danh sách
         void deleteEmployee();
