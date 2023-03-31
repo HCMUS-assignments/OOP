@@ -4,6 +4,9 @@
 #include "NhanVien.h"
 #include "NVSanXuat.h"
 #include "NVCongNhat.h"
+#include <fstream>
+#include <sstream>
+#include <string.h>
 
 class CongTy {
     private:
@@ -26,8 +29,8 @@ class CongTy {
         // other methods
 
         // 1. Nhập, xuất danh sách các nhân viên
-        void input();
-        void output();
+        void read();
+        void write();
 
         // 2. Tính tổng tiền lương của tất cả các nhân viên
         int sumSalaryOfAll();
@@ -48,7 +51,8 @@ class CongTy {
         int countEmployeeHasBirthdayInMay();
 
         // 8. Thêm 1 nhân viên vào danh sách
-        void addEmployee();
+        void addEmployee(NVSanXuat  nvsx);
+        void addEmployee(NVCongNhat nvcn);
 
         // 9. Xóa 1 nhân viên khỏi danh sách
         void deleteEmployee();
