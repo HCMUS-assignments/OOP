@@ -64,9 +64,13 @@ double CEbook::getPrice()
 {
     return price;
 }
-CMyDate CEbook::getDate()
+string CEbook::getStrDate()
 {
     return date.toStr();
+}
+CMyDate CEbook::getDate()
+{
+    return date;
 }
 
 // operators
@@ -109,10 +113,12 @@ ifstream &operator>>(ifstream &fin, CEbook &src)
     src.date = CMyDate(line);
     getline(fin, line);
     src.kind = line;
+
     getline(fin, line);
     src.publisher = line;
     getline(fin, line);
     src.price = stod(line);
+    cout << src.ISBN << " | " << src.name << " | " << src.author << " | " << src.date << " | " << src.kind << " | " << src.publisher << " | " << src.price << endl;
 
     return fin;
 }

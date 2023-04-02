@@ -34,6 +34,7 @@ class CEbook {
         string getName();
         double getPrice();
         CMyDate getDate();
+        string getStrDate();
 
         // operators
         bool operator>(const CEbook&);

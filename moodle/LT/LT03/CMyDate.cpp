@@ -21,7 +21,8 @@ CMyDate::CMyDate(string line)
     d = stoi(temp);
     getline(ss, temp, '/');
     m = stoi(temp);
-    y = stoi(ss.str());
+    int pos = line.find_last_of('/');
+    y = stoi(line.substr(pos + 1));
 }
 
 // operator

@@ -1,5 +1,6 @@
 9780124159730
 Computer Animation
+Rick Parent
 3/6/2012
 Algorithms and Techniques
 Elsevier Science
@@ -11,3 +12,31 @@ Rick Parent
 Algorithms and Techniques
 Elsevier Science
 49.95
+325346344797
+Computer Animation
+Rick Parent
+7/3/2021
+Algorithms and Techniques
+Elsevier Science
+98.72
+325346346730
+Computer Animation
+Rick Parent
+3/8/2019
+Algorithms and Techniques
+Elsevier Science
+99.67
+325346344856
+Computer Animation
+Rick Parent
+18/3/2018
+Algorithms and Techniques
+Elsevier Science
+22.03
+325346345730
+Computer Animation
+Rick Parent
+25/3/2022
+Algorithms and Techniques
+Elsevier Science
+77.58

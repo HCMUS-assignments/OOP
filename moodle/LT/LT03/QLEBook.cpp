@@ -3,9 +3,9 @@
 // constructors
 QLEBook::QLEBook()
 {
-    ebook = NULL;
-    max = 100;
     n = 0;
+    max = 100;
+    ebook = new CEbook[max];
 }
 
 // destructor
@@ -67,9 +67,13 @@ void QLEBook::stat()
         cout << "Can't open file output2.txt" << endl;
         return;
     }
-
-
-
+    for (int i = 0; i < n; i++) {
+        string _isbn = ebook[i].getISBN();
+        _isbn = _isbn.substr(_isbn.length() - 3, 3);
+        if (_isbn == "730")
+            fout << ebook[i].getISBN() << endl;
+    }
+    fout.close();
 }
 
 // 3. Sắp xếp các sách theo thứ tự ngày sản xuất tăng dần, xuất ra output3.txt
@@ -77,15 +81,29 @@ void QLEBook::sortDate()
 {
     for (int i = 0; i < n-1; i++) {
         for (int j = i + 1; j < n; j++) {
-            
+            CMyDate date1 = ebook[i].getDate();
+            CMyDate date2 = ebook[j].getDate();
+            if (date1 > date2) {
+                CEbook temp = ebook[i];
+                ebook[i] = ebook[j];
+                ebook[j] = temp;
+            }
         }
         
     }
+    ofstream fout("output3.txt");
+    if (fout.fail()) {
+        cout << "Can't open file output3.txt" << endl;
+        return;
+    }
+    for (int i = 0; i < n; i++) {
+        fout << ebook[i].getISBN() << " " << ebook[i].getStrDate() << endl;
+    }
+    fout.close();
 }
 // input/output
 ifstream &operator>>(ifstream &fin, QLEBook &src)
 {
-
     while (!fin.eof()) {
         if (src.n == src.max) {
             CEbook *temp = new CEbook[src.max + 100];
