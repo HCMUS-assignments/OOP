@@ -1,6 +1,7 @@
 #ifndef CEBOOK_H
 #define CEBOOK_H
 
+#include "CMyDate.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -28,6 +29,12 @@ class CEbook {
         CEbook& operator=(const CEbook&);
 
         // other methods
+        // getters 
+        string getISBN();
+        string getName();
+        double getPrice();
+        CMyDate getDate();
+
         // operators
         bool operator>(const CEbook&);
         bool operator>=(const CEbook&);

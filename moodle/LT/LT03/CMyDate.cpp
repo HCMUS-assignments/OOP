@@ -3,6 +3,9 @@
 // constructor
 CMyDate::CMyDate()
 {
+    d = 0;
+    m = 0;
+    y = 0;
 }
 CMyDate::CMyDate(int day, int month, int year)
 {
@@ -97,4 +100,28 @@ bool CMyDate::operator<=(const CMyDate &another)
         }
     }
     return false;
+}
+
+// operator =
+CMyDate &CMyDate::operator=(const CMyDate &another)
+{
+    if (this == &another)
+        return *this;
+    d = another.d;
+    m = another.m;
+    y = another.y;
+    return *this;
+}
+
+ostream &operator<<(ostream &os, CMyDate &another)
+{
+    os << another.d << "/" << another.m << "/" << another.y;
+    return os;
+}
+
+string CMyDate::toStr()
+{
+    stringstream ss;
+    ss << d << "/" << m << "/" << y;
+    return ss.str();
 }

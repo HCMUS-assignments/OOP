@@ -16,6 +16,9 @@ class CMyDate {
         CMyDate(int, int, int);
         CMyDate(string);
 
+        // operator =
+        CMyDate& operator=(const CMyDate&);
+
         // operator
         bool operator==(const CMyDate&);
         bool operator!=(const CMyDate&);
@@ -23,6 +26,10 @@ class CMyDate {
         bool operator>=(const CMyDate&);
         bool operator<(const CMyDate&);
         bool operator<=(const CMyDate&);
+
+        friend ostream& operator<<(ostream&, CMyDate&);
+
+        string toStr();
 
 };
 
