@@ -18,6 +18,8 @@ class Roster {
     public:
         // constructor
         Roster();
+        Roster(const Roster& other);
+        Roster& operator= (Roster &other);
 
         // getters
         int getSize();

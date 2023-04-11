@@ -17,6 +17,12 @@ Schedule::Schedule() {
     }
 }
 
+Schedule::Schedule(const Schedule& other) {
+    for (auto i = 0; i < other.week.size(); i++) {
+        week.push_back(other.week[i]);
+    }
+}
+
 
 // getters
 Day& Schedule::at(char* name) {

@@ -13,6 +13,8 @@ class Schedule {
     public:
     // constructor
     Schedule();
+    Schedule(const Schedule& other);
+    Schedule& operator= (Schedule &other);
 
 
     // getters

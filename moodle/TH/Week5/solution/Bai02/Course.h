@@ -10,13 +10,14 @@ class Course {
     private:
         char* _id;
         char* _name;
-        vector<Day> schedule;
-
-        // Roster list;
+        
+        vector<Day> _schedule;
+        Roster _list;
 
     public:
         // constructor
         Course() ;
+        Course(char* id, char* name, char* schedule, char* list);
         Course(const Course& other);
         Course& operator= (Course &other);
 

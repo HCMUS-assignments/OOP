@@ -8,6 +8,56 @@ Course::Course()
     _name = NULL;
 }
 
+Course::Course(char *id, char *name, char *schedule, char *list)
+{
+    _id = new char[strlen(id) + 1];
+    _name = new char[strlen(name) + 1];
+
+    strcpy(_id, id);
+    strcpy(_name, name);
+
+    // schedule
+    string schedule_str = schedule;
+    // ignore { and }
+    schedule_str = schedule_str.substr(1, schedule_str.length() - 2);
+
+    // declare variables
+    string dayName_str = "";
+    string morning = "";
+    string afternoon = "";
+    
+    while (schedule_str.length() > 0)
+    {
+        // get day name
+        int pos = schedule_str.find(":");
+        dayName_str = schedule_str.substr(0, pos);
+        schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
+
+        // get morning and afternoon
+        // ignore ( 
+        schedule_str = schedule_str.substr(1, schedule_str.length() - 1);
+        pos = schedule_str.find(",");
+        morning = schedule_str.substr(0, pos);
+        schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
+
+        pos = schedule_str.find(")");
+        afternoon = schedule_str.substr(0, pos);
+        schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
+
+        // add day to schedule
+        Day day((char*) dayName_str.c_str(), (char*) morning.c_str(), (char*) afternoon.c_str());
+        _schedule.push_back(day);
+
+        // ignore , and space if have
+        if (schedule_str.length() > 0)
+        {
+            schedule_str = schedule_str.substr(2, schedule_str.length() - 2);
+        }
+    }
+
+    // split list student if have
+}
+
 Course::Course(const Course &other)
 {
     _id = new char[strlen(other._id) + 1];
@@ -17,14 +67,13 @@ Course::Course(const Course &other)
     strcpy(_name, other._name);
 
     // list day
-    schedule.clear();
+    _schedule.clear();
     cout << "add schedule course...\n";
-    for (int i = 0; i < other.schedule.size(); i++)
+    for (int i = 0; i < other._schedule.size(); i++)
     {
-        schedule.push_back(other.schedule[i]);
+        _schedule.push_back(other._schedule[i]);
     }
     cout << "add schedule course success...\n";
-
 }
 
 Course &Course::operator=(Course &other)
@@ -46,9 +95,9 @@ Course &Course::operator=(Course &other)
         strcpy(_name, other._name);
 
         // list day
-        for (int i = 0; i < other.schedule.size(); i++)
+        for (int i = 0; i < other._schedule.size(); i++)
         {
-            schedule.push_back(other.schedule[i]);
+            _schedule.push_back(other._schedule[i]);
         }
     }
 
@@ -70,7 +119,7 @@ void Course::setName(char *name)
 
 void Course::setSchedule(char *nameDay, char *time)
 {
-    cout << "... start set schedule...\n";
+    cout << "... start set _schedule...\n";
     cout << "size: " << getSizeSchedule() << endl;
     cout << "\nName day: " << nameDay << endl;
     cout << "\nTime: " << time << endl;
@@ -94,19 +143,20 @@ void Course::setSchedule(char *nameDay, char *time)
         newDay.setSubMorning(notExist);
         newDay.setSubAfternoon(exist);
     }
-    schedule.push_back(newDay);
+    _schedule.push_back(newDay);
 
-    cout << "... end set schedule...\n";
+    cout << "... end set _schedule...\n";
     cout << "size: " << getSizeSchedule() << endl;
     cout << "Schedule: \n";
-    for (int i = 0; i < schedule.size(); i++)
+    for (int i = 0; i < _schedule.size(); i++)
     {
-        cout << "Day " << i + 1 << " : " << schedule[i].getNameDay() << " " << schedule[i].getSubMorning() << " " << schedule[i].getSubAfternoon() << endl;
+        cout << "Day " << i + 1 << " : " << _schedule[i].getNameDay() << " " << _schedule[i].getSubMorning() << " " << _schedule[i].getSubAfternoon() << endl;
     }
 }
 
-void Course::clearSchedule() {
-    schedule.clear();
+void Course::clearSchedule()
+{
+    _schedule.clear();
 }
 
 // getters
@@ -122,10 +172,10 @@ char *Course::getName()
 
 int Course::getSizeSchedule()
 {
-    return schedule.size();
+    return _schedule.size();
 }
 
 vector<Day> Course::getSchedule()
 {
-    return schedule;
+    return _schedule;
 }

@@ -5,6 +5,7 @@
 #include "Course.h"
 #include "Utils.h"
 
+#include <string.h>
 #include <vector>
 #include <fstream>
 using namespace std;
