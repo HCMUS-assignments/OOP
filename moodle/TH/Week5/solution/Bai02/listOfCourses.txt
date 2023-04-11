@@ -1,0 +1,50 @@
+CSC10003, Phuong phap lap trinh huong doi tuong, {Sun: (x,  ), Thurs: (x,  )}, {}
+BAA00104, Lich su Dang Cong san Viet Nam, {Sat: (x,  )}, {}
+BAA00103, Chu nghia xa hoi khoa hoc, {Sun: ( , x), Mon: ( , x)}, {}
+BAA00005, Kinh te dai cuong, {Fri: (x,  )}, {}
+MTH00030, Dai so tuyen tinh, {Thurs: ( , x)}, {}
+BAA00006, Tam ly dai cuong, {Sat: (x,  )}, {}
+BAA00102, Kinh te chinh tri Mac-LeNin, {Tues: (x,  ), Mon: (x,  )}, {}
+BAA00005, Kinh te dai cuong, {Fri: (x,  ), Thurs: ( , x)}, {}
+CSC10008, Mang may tinh, {Sat: (x,  ), Mon: ( , x)}, {}
+CSC10006, Co so du lieu, {Fri: (x,  )}, {}
+BAA00006, Tam ly dai cuong, {Thurs: ( , x), Tues: ( , x)}, {}
+CSC10008, Mang may tinh, {Mon: (x,  )}, {}
+CSC10004, Cau truc du lieu va giai thuat, {Mon: ( , x), Thurs: (x,  )}, {}
+BAA00004, Phap luat dai cuong, {Sat: (x,  ), Tues: ( , x)}, {}
+BAA00008, Ky nang lam viec nhom va hoc tap, {Thurs: (x,  )}, {}
+ADD00031, Anh van 1, {Tues: (x,  )}, {}
+MTH00052, Phuong phap tinh, {Fri: ( , x)}, {}
+MTH00051, Toan ung dung va thong ke, {Sat: (x,  ), Thurs: (x,  )}, {}
+CSC10003, Phuong phap lap trinh huong doi tuong, {Sat: (x,  )}, {}
+BAA00003, Tu tuong Ho Chi Minh, {Wed: (x,  ), Sat: ( , x)}, {}
+BAA00101, Triet hoc Mac-LeNin, {Fri: ( , x)}, {}
+BAA00004, Phap luat dai cuong, {Sun: ( , x)}, {}
+MTH00030, Dai so tuyen tinh, {Wed: (x,  ), Tues: (x,  )}, {}
+BAA00007, Phuong phap luan sang tao, {Fri: ( , x)}, {}
+CSC13102, Lap trinh ung dung Java, {Tues: ( , x), Fri: (x,  )}, {}
+CSC10001, Nhap mon lap trinh, {Fri: ( , x)}, {}
+ADD00033, Anh van 3, {Sat: (x,  )}, {}
+BAA00008, Ky nang lam viec nhom va hoc tap, {Sun: (x,  ), Sun: ( , x)}, {}
+BAA00102, Kinh te chinh tri Mac-LeNin, {Sun: ( , x)}, {}
+MTH00053, Ly thuyet so, {Thurs: ( , x), Sat: ( , x)}, {}
+CSC10002, Ky thuat lap trinh, {Mon: ( , x)}, {}
+BAA00103, Chu nghia xa hoi khoa hoc, {Wed: ( , x)}, {}
+BAA00003, Tu tuong Ho Chi Minh, {Fri: ( , x)}, {}
+MTH00040, Xac suat thong ke, {Mon: (x,  )}, {}
+CSC10009, He thong may tinh, {Fri: ( , x), Sat: (x,  )}, {}
+CSC10006, Co so du lieu, {Fri: (x,  ), Thurs: ( , x)}, {}
+ADD00033, Anh van 3, {Mon: (x,  ), Thurs: (x,  )}, {}
+BAA00104, Lich su Dang Cong san Viet Nam, {Tues: (x,  ), Sun: (x,  )}, {}
+MTH00051, Toan ung dung va thong ke, {Tues: (x,  )}, {}
+MTH00053, Ly thuyet so, {Sun: ( , x)}, {}
+ADD00032, Anh van 2, {Tues: (x,  ), Wed: (x,  )}, {}
+ADD00032, Anh van 2, {Fri: (x,  )}, {}
+CSC10004, Cau truc du lieu va giai thuat, {Tues: ( , x)}, {}
+CSC10002, Ky thuat lap trinh, {Mon: (x,  ), Fri: ( , x)}, {}
+CSC13102, Lap trinh ung dung Java, {Fri: ( , x)}, {}
+ADD00031, Anh van 1, {Mon: ( , x), Wed: ( , x)}, {}
+CSC10009, He thong may tinh, {Tues: (x,  )}, {}
+MTH00052, Phuong phap tinh, {Mon: ( , x), Sun: ( , x)}, {}
+BAA00101, Triet hoc Mac-LeNin, {Wed: ( , x), Mon: (x,  )}, {}
+BAA00007, Phuong phap luan sang tao, {Sun: (x,  ), Fri: (x,  )}, {}
