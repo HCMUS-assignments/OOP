@@ -205,3 +205,24 @@ vector<Day> Course::getSchedule()
 {
     return _schedule;
 }
+
+string Course::getScheduleStr() {
+    string res = "";
+    for (int i = 0; i < _schedule.size(); i++) {
+        res += _schedule[i].getNameDay();
+        res += "(";
+        if (strcmp(_schedule[i].getSubMorning(), "x") == 0) {
+            res += "1-4";
+        } else {
+            res += "6-9";
+        }
+        res += ")";
+        if (i < _schedule.size() - 1) {
+            res += ", ";
+        }
+    }
+}
+
+Roster Course::getRoster() {
+    return _list;
+}

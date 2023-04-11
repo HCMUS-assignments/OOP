@@ -2,6 +2,7 @@
 #define STUDENT_H
 
 #include "Schedule.h"
+#include "Utils.h"
 
 class Student {
 private:
@@ -25,12 +26,15 @@ public:
     ~Student();
 
     // getters
+    int getNumCourseJoined();
     int getNumCourseCanRegister();
 
     char* getId();
     char* getFullname();
     char* getBirthday();
     char* getAddress();
+
+    char* getScheduleStr();
     
 
 

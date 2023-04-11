@@ -57,11 +57,89 @@ void Registrar::readCoursesFromFile(char *fileName)
 // 2. Sinh viên đăng ký khóa học
 void Registrar::registerCourse()
 {
+    // 1. enter id of student
+    Student student;
+    string id;
+
+    while (true)
+    {
+        cout << "\nEnter your ID: ";
+        getline(cin, id);
+
+        // find and return student info if have
+        int i = 0;
+        for (i = 0; i < _listOfStudents.size(); i++)
+        {
+            if (strcmp(_listOfStudents[i].getId(), id.c_str()) == 0)
+            {
+                student = _listOfStudents[i];
+                break;
+            }
+        }
+        if (i == _listOfStudents.size())
+        {
+            cout << "\n...Student not found... please enter again ...\n";
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    cout << "\nNumber course you joined: " << student.getNumCourseJoined() << endl;
+    cout << "\nYou can register " << student.getNumCourseCanRegister() << " course(s)\n";
+
+    // 2. print list course that student can register: not yet register (ID - Name - Schedule - Size)
+    cout << "\nList of courses bellow: \n";
+    for (int i = 0; i < _listOfCourses.size(); i++)
+    {
+        cout << _listOfCourses[i].getId() << " - " << _listOfCourses[i].getName() << " - ";
+        cout << _listOfCourses[i].getScheduleStr() << " - " << _listOfCourses[i].getRoster().getSizeStr() << endl;
+    }
+
+    // 3. enter id of course that student want to register
+    string idCourse;
+    Course course;
+    while (true)
+    {
+        cout << "\nEnter ID of course that you want to register: ";
+        getline(cin, idCourse);
+
+        // check if course is exist
+        int i = 0;
+        for (i = 0; i < _listOfCourses.size(); i++)
+        {
+            if (strcmp(_listOfCourses[i].getId(), idCourse.c_str()) == 0)
+            {
+                course = _listOfCourses[i];
+                break;
+            }
+        }
+        if (i == _listOfCourses.size())
+        {
+            cout << "\n...Course not found... please enter again ...\n";
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    // --------------- handle register course------------------------
+    // 4. check if student can register course
 }
 
 // 3. Ghi danh sách sinh viên lên file
 void Registrar::writeStudentsIntoFile(char *fileName)
 {
+    ofstream fout(fileName);
+    // format: id, name, birthday, address, {course joined}
+    for (int i = 0; i < _listOfStudents.size(); i++)
+    {
+        fout << _listOfStudents[i].getId() << "," << _listOfStudents[i].getFullname() << ", " << _listOfStudents[i].getBirthday() << ", " << _listOfStudents[i].getAddress() << ", ";
+        fout << _listOfStudents[i].getScheduleStr() << endl;
+    }
+    fout.close();
 }
 
 // 4. Đọc danh sách sinh viên từ file, xuất ra màn hình

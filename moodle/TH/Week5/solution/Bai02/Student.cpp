@@ -93,6 +93,10 @@ int Student::getNumCourseCanRegister() {
     return maxCourse - numCourseRegistered;
 }
 
+int Student::getNumCourseJoined() {
+    return numCourseRegistered;
+}
+
 char* Student::getId() {
     return _id;
 }
@@ -107,4 +111,26 @@ char* Student::getBirthday() {
 
 char* Student::getAddress() {
     return _address;
+}
+
+
+char* Student::getScheduleStr() {
+    string str = "{";
+    char dayOfWeeek[] = "Mon, Tues, Wed, Thurs, Fri, Sat, Sun";
+    vector<char*> days = Utils::Split(dayOfWeeek);
+
+    for (int i = 0; i < days.size(); i++) {
+        str += days[i];
+        str += ": (";
+        Day day = _timeTable.at(days[i]);
+        str += day.getSubMorning();
+        str += ", ";
+        str += day.getSubAfternoon();
+        str += ")";;
+        if (i != days.size() - 1) {
+            str += ", ";
+        }
+    }
+    str += "}";
+    return (char*) str.c_str();
 }

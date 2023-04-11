@@ -10,7 +10,7 @@ class Course {
     private:
         char* _id;
         char* _name;
-        
+
         vector<Day> _schedule;
         Roster _list;
 
@@ -30,8 +30,12 @@ class Course {
         // getters
         char* getId();
         char* getName();
+
         int getSizeSchedule();
         vector<Day> getSchedule();
+        string getScheduleStr();
+
+        Roster getRoster();
 
 
 
