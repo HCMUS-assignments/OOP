@@ -48,3 +48,14 @@ char* Roster::getSizeStr() {
     strcpy(str, res.c_str());
     return str;
 }
+
+void Roster::addStudent(char* id, char* name) {
+    Info info;
+    info._id = new char[strlen(id) + 1];
+    info._name = new char[strlen(name) + 1];
+
+    strcpy(info._id, id);
+    strcpy(info._name, name);
+
+    studentNames.push_back(info);
+}

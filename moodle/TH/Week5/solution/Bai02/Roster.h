@@ -23,8 +23,9 @@ class Roster {
 
         // getters
         int getSize();
-
         char* getSizeStr();
+
+        void addStudent(char* id, char* name);
 
 
 

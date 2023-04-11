@@ -56,6 +56,32 @@ Course::Course(char *id, char *name, char *schedule, char *list)
     }
 
     // split list student if have
+    // format: {1. (id, name), 2. (id, name), ...}
+    // ignore { and }
+    string roster_str = list;
+    roster_str = roster_str.substr(1, roster_str.length() - 2);
+    while (roster_str.length() > 0) {
+        // ignore number order
+        int pos = roster_str.find("(");
+        roster_str = roster_str.substr(pos + 1, roster_str.length() - pos - 1);
+        pos = roster_str.find(",");
+        string id_str = roster_str.substr(0, pos);
+        roster_str = roster_str.substr(pos + 2, roster_str.length() - pos - 2); // ignore space
+        pos = roster_str.find(")");
+        string name_str = roster_str.substr(0, pos);
+
+        // add student to roster
+        _list.addStudent((char*) id_str.c_str(), (char*) name_str.c_str());
+
+        // ignore )
+        roster_str = roster_str.substr(pos + 1, roster_str.length() - pos - 1);
+
+        // ignore , and space if have
+        if (roster_str.length() > 0)
+        {
+            roster_str = roster_str.substr(2, roster_str.length() - 2);
+        }
+    }
 }
 
 Course::Course(const Course &other)
