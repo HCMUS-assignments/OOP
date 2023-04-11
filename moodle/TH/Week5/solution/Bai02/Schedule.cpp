@@ -2,16 +2,14 @@
 
 // define
 Schedule::Schedule() {
-    char *arrayNames = "Mon, Tues, Wed, Thurs, Fri, Sat, Sun";
+    char arrayNames[] = "Mon, Tues, Wed, Thurs, Fri, Sat, Sun";
     vector<char*> names = Utils::Split(arrayNames);
 
     for (auto i = 0; i < names.size(); i++) {
-        Day dayOfWeek(names[i], "x", "x");
+        char *mark = new char[2];
+        strcpy(mark, "x");
+        Day dayOfWeek(names[i], mark, mark);
         week.push_back(dayOfWeek);
-    }
-
-    if (arrayNames != NULL) {
-        delete arrayNames;
     }
 
     for (auto i = 0; i < names.size(); i++ ) {

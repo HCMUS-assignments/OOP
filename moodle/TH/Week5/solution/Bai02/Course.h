@@ -10,16 +10,29 @@ class Course {
     private:
         char* _id;
         char* _name;
-        char* _start;
-        vector<Day> classes;
+        vector<Day> schedule;
 
-        Roster list;
+        // Roster list;
 
     public:
         // constructor
         Course() ;
+        Course(const Course& other);
+        Course& operator= (Course &other);
 
-        
+        // setters
+        void setId(char* id);
+        void setName(char* name);
+        void setSchedule(char* nameDay, char* time);
+        void clearSchedule();
+
+        // getters
+        char* getId();
+        char* getName();
+        int getSizeSchedule();
+        vector<Day> getSchedule();
+
+
 
 };
 

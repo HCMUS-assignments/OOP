@@ -3,14 +3,17 @@
 
 #include "Student.h"
 #include "Course.h"
+#include "Utils.h"
+
 #include <vector>
+#include <fstream>
 using namespace std;
 
 
 class Registrar {
 private:
     vector<Student> _listOfStudents;
-    vector<Course> _listOfCourse;
+    vector<Course> _listOfCourses;
 
 public:
 

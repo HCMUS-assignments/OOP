@@ -14,6 +14,8 @@ public:
     // constructor
     Day();
     Day(char* name, char* subMorning, char* subAfternoon);
+    Day(const Day &other);
+    Day& operator= (Day& other);
 
     // destructure
     ~Day();

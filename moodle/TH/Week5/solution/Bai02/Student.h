@@ -17,12 +17,20 @@ private:
 public:
     // constructor
     Student();
+    Student(char* id, char* fullname, char* birthday, char* address);
+    Student(const Student& other);
+    Student& operator= (Student &other);
 
     // destructor
     ~Student();
 
     // getters
     int getNumCourseCanRegister();
+
+    char* getId();
+    char* getFullname();
+    char* getBirthday();
+    char* getAddress();
     
 
 
