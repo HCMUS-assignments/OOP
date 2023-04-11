@@ -12,6 +12,7 @@ void Registrar::readCoursesFromFile(char *fileName)
 {
     // file courses:
     // id, name, classes, list students
+    _listOfCourses.clear();
 
     string line;
     ifstream fin(fileName);
@@ -145,11 +146,72 @@ void Registrar::writeStudentsIntoFile(char *fileName)
 // 4. Đọc danh sách sinh viên từ file, xuất ra màn hình
 void Registrar::printStudents(char *fileName)
 {
+    _listOfStudents.clear();
+    string line;
+    ifstream fin(fileName);
+    if (fin.fail())
+    {
+        cout << "\n...Error opening " << fileName << " ... \n";
+        return;
+    }
+    while (getline(fin, line))
+    {
+        // handle reading line
+        string id, name, birthday, address, schedule;
+        int pos = 0;
+        // id
+        pos = line.find(",");
+        id = line.substr(0, pos);
+        line.erase(0, pos + 1);
+        // name
+        pos = line.find(",");
+        name = line.substr(0, pos);
+        line.erase(0, pos + 1);
+        // birthday
+        pos = line.find(",");
+        birthday = line.substr(0, pos);
+        line.erase(0, pos + 1);
+        // address
+        pos = line.find(",");
+        address = line.substr(0, pos);
+        line.erase(0, pos + 1);
+        // schedule
+        schedule = line;
+
+        // add info to student
+        Student student((char*) id.c_str(), (char*) name.c_str(), (char*) birthday.c_str(), (char*) address.c_str());
+        student.setTimeTable((char*) schedule.c_str());
+
+        _listOfStudents.push_back(student);
+    }
+    fin.close();
 }
 
 // 5. In danh sách sinh viên của một khóa học
 void Registrar::printStudentsOfCourse()
 {
+    string id;
+    while (true) {
+        cout << "enter id of course: ";
+        getline(cin, id);
+
+        // check if course is exist
+        int i = 0;
+        for (i = 0; i < _listOfCourses.size(); i++)
+        {
+            if (strcmp(_listOfCourses[i].getId(), id.c_str()) == 0)
+            {
+                Roster list = _listOfCourses[i].getRoster();
+                cout << "\nList of students of course " << _listOfCourses[i].getName() << ":\n";
+                list.print();
+                return;
+            }
+        }
+        if (i == _listOfCourses.size())
+        {
+            cout << "\n...Course not found... please enter again ...\n";
+        }
+    }
 }
 
 // 6. In thời khóa biểu của sinh viên(ds khóa học sinh viên đã đăng ký)

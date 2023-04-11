@@ -59,3 +59,9 @@ void Roster::addStudent(char* id, char* name) {
 
     studentNames.push_back(info);
 }
+
+void Roster::print() {
+    for (int i = 0; i < studentNames.size(); i++) {
+        cout << i + 1 << ". " << studentNames[i]._id << " - " << studentNames[i]._name << endl;
+    }
+}

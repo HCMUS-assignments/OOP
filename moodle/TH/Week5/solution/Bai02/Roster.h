@@ -4,6 +4,7 @@
 #include <vector>
 #include <string.h>
 #include <string>
+#include <iostream>
 using namespace std;
 
 struct Info {
@@ -26,6 +27,7 @@ class Roster {
         char* getSizeStr();
 
         void addStudent(char* id, char* name);
+        void print();
 
 
 

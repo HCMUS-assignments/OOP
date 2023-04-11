@@ -89,6 +89,24 @@ Student::~Student() {
     }
 }
 
+// setters
+void Student::setTimeTable(char* timeTable) {
+    // timeTable format: {Mon: (Math, Physic), Tues: (Math, Physic), Wed: (Math, Physic), Thurs: (Math, Physic), Fri: (Math, Physic), Sat: (Math, Physic), Sun: (Math, Physic)}
+    // handle later ....
+
+
+
+
+
+
+
+
+
+
+
+    
+}
+
 int Student::getNumCourseCanRegister() {
     return maxCourse - numCourseRegistered;
 }

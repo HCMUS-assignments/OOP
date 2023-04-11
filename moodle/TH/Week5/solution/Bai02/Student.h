@@ -25,6 +25,9 @@ public:
     // destructor
     ~Student();
 
+    // setters
+    void setTimeTable(char* timeTable);
+
     // getters
     int getNumCourseJoined();
     int getNumCourseCanRegister();
