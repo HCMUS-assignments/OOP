@@ -2,6 +2,7 @@
 #define SCHEDULE_H
 
 #include "Day.h"
+#include "Utils.h"
 #include <vector>
 using namespace std;
 
@@ -10,6 +11,15 @@ class Schedule {
         vector<Day> week;
 
     public:
+    // constructor
+    Schedule();
+
+
+    // getters
+    Day& at(char* name) ;
+
+
+
 };
 
 #endif

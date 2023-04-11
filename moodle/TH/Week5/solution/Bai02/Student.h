@@ -11,7 +11,18 @@ private:
     char* _address;
     Schedule _timeTable;
 
+    int maxCourse;
+    int numCourseRegistered;
+
 public:
+    // constructor
+    Student();
+
+    // destructor
+    ~Student();
+
+    // getters
+    int getNumCourseCanRegister();
     
 
 

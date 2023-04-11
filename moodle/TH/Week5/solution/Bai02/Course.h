@@ -16,6 +16,10 @@ class Course {
         Roster list;
 
     public:
+        // constructor
+        Course() ;
+
+        
 
 };
 
