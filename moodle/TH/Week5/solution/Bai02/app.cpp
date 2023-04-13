@@ -1,4 +1,5 @@
 #include "Registrar.h"
+#include <windows.h>
 
 
 // 1. xử lý đăng ký khóa học (done)
@@ -9,6 +10,8 @@
 
 
 int main() {
+    SetConsoleOutputCP(65001);
+    
     Registrar registrar;
     registrar.run();
 
