@@ -45,8 +45,27 @@ void randomCourses(int size, char *fileName)
         while (true)
         {
             newCourse.clearSchedule();
-            int numRan = rand() % maxCourses;
-            newCourse.setId(listIDs[numRan]);
+            string id = "";
+            int numRan;
+            while (true)
+            {
+                numRan = rand() % maxCourses;
+                // random 2 digits insert into last of course
+                int digits = rand() % 100 + 10;
+                if (digits < 10 || digits >= 100) {
+                    continue;
+                }
+                id += listIDs[numRan];
+                id += to_string(digits);
+                for (int i = 0; i < list.size(); i++) {
+                    if (strcmp(list[i].getId(), id.c_str()) == 0) {
+                        continue;
+                    }
+                }
+                break;
+            }
+
+            newCourse.setId(((char*) id.c_str()));
             newCourse.setName(listCourses[numRan]);
 
             int numTime = rand() % maxClasses + 1;
@@ -227,7 +246,7 @@ void randomStudents(int size, char *fileName)
         _address += listAdd[rand() % 16];
 
         // add to list
-        Student newStudent((char*) _id.c_str(),(char*) _fullname.c_str(), (char*) _bd.c_str(), (char*) _address.c_str());
+        Student newStudent((char *)_id.c_str(), (char *)_fullname.c_str(), (char *)_bd.c_str(), (char *)_address.c_str());
         list.push_back(newStudent);
     }
 
@@ -242,7 +261,8 @@ void randomStudents(int size, char *fileName)
     for (int count = 0; count < size; count++)
     {
         fout << list[count].getId() << ", " << list[count].getFullname() << ", " << list[count].getBirthday() << ", "
-             << list[count].getAddress() << ", " << "{}" << endl;
+             << list[count].getAddress() << ", "
+             << "{}" << endl;
     }
     fout.close();
 }

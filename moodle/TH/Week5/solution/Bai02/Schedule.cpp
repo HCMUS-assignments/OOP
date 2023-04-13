@@ -42,12 +42,15 @@ Day Schedule::getAt(char *name)
 
 void Schedule::setAt(char *name, char *subject, char *time)
 {
+    // cout << "\nName: " << name << endl;
+    // cout << "\nSubject: " << subject << endl;
+    // cout << "\nTime: " << time << endl;
+
     for (auto i = 0; i < week.size(); i++)
     {
-        cout << "\ncome here...\n";
         if (strcmp(week[i].getNameDay(), name) == 0)
         {
-            cout << "\n...setting time table\n";
+            // cout << "\n...setting time table\n";
             if (strcmp(time, "morning") == 0)
             {
                 week[i].setSubMorning(subject);
@@ -81,7 +84,9 @@ void Schedule::print()
          << "|   ";
     for (int i = 0; i < week.size(); i++)
     {
-        cout << setw(5) << setfill(' ') << week[i].getNameDay() << setw(5) << setfill(' ');
+        int len = strlen(week[i].getNameDay());
+        int left = int((14-len)/2);
+        cout << setw(left) << setfill(' ') << ""<< week[i].getNameDay() << setw(14-left-len) << setfill(' ') << "";
         cout << "|";
     }
     // print the subject of morning
@@ -89,8 +94,10 @@ void Schedule::print()
          << "|   ";
     for (int i = 0; i < week.size(); i++)
     {
-        cout << setw(5) << setfill(' ') << week[i].getSubMorning() << setw(5) << setfill(' ');
+        int len = strlen(week[i].getSubMorning());
+        int left = int((14-len)/2);
 
+        cout << setw(left) << setfill(' ') << ""<< week[i].getSubMorning() << setw(14-left-len) << setfill(' ') << "";
         cout << "|";
     }
 
@@ -99,8 +106,10 @@ void Schedule::print()
          << "|   ";
     for (int i = 0; i < week.size(); i++)
     {
-        cout << setw(5) << setfill(' ') << week[i].getSubAfternoon() << setw(5) << setfill(' ');
+        int len = strlen(week[i].getSubAfternoon());
+        int left = int((14-len)/2);
 
+        cout << setw(left) << setfill(' ') << ""<< week[i].getSubAfternoon() << setw(14-left-len) << setfill(' ') << "";
         cout << "|";
     }
 

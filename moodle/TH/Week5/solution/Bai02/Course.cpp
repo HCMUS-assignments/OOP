@@ -12,6 +12,7 @@ Course::Course(char *id, char *name, char *schedule, char *list)
 {
     _id = new char[strlen(id) + 1];
     _name = new char[strlen(name) + 1];
+    // cout << "\nid: " << id << endl;
 
     strcpy(_id, id);
     strcpy(_name, name);
@@ -28,7 +29,7 @@ Course::Course(char *id, char *name, char *schedule, char *list)
 
     while (schedule_str.length() > 0)
     {
-        cout << "\nSchedule: " << schedule_str << endl;
+        // cout << "\nSchedule: " << schedule_str << endl;
         // get day name
         int pos = schedule_str.find(":");
         dayName_str = schedule_str.substr(0, pos);
@@ -46,8 +47,8 @@ Course::Course(char *id, char *name, char *schedule, char *list)
         schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
 
         // add day to schedule
-        cout << "morning: " << morning << endl;
-        cout << "afternoon: " << afternoon << endl;
+        // cout << "morning: " << morning << endl;
+        // cout << "afternoon: " << afternoon << endl;
         Day day((char *)dayName_str.c_str(), (char *)morning.c_str(), (char *)afternoon.c_str());
         _schedule.push_back(day);
 
