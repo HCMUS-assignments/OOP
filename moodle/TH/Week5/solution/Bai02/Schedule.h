@@ -4,6 +4,7 @@
 #include "Day.h"
 #include "Utils.h"
 #include <vector>
+#include <iomanip>
 using namespace std;
 
 class Schedule {
@@ -18,7 +19,12 @@ class Schedule {
 
 
     // getters
-    Day& at(char* name) ;
+    Day getAt(char* name) ;
+    void setAt(char* name, char* subject, char* time);
+    void setDay(char* name, char* sub1, char* sub2);
+
+    // other methods
+    void print();
 
 
 

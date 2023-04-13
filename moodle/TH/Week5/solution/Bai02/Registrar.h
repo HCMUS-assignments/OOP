@@ -25,16 +25,16 @@ public:
     // ------------------------------------------------------
 
     // 1. Đọc danh sách khóa học từ file
-    void readCoursesFromFile(char* fileName);
+    void readCoursesFromFile(const char* fileName);
 
     // 2. Sinh viên đăng ký khóa học
     void registerCourse();
 
     // 3. Ghi danh sách sinh viên lên file
-    void writeStudentsIntoFile(char* fileName);
+    void writeStudentsIntoFile(const char* fileName);
 
     // 4. Đọc danh sách sinh viên từ file, xuất ra màn hình
-    void printStudents(char* fileName);
+    void printStudents(const char* fileName);
 
     // 5. In danh sách sinh viên của một khóa học
     void printStudentsOfCourse();
@@ -43,6 +43,10 @@ public:
     void printSchedule();
 
     // --------------------------------------------------------
+
+
+    // other methods
+    void run();
 
 
 

@@ -37,7 +37,10 @@ public:
     char* getBirthday();
     char* getAddress();
 
+    // relate to schedule
     char* getScheduleStr();
+    void printSchedule();
+    Schedule getTimeTable();
     
 
 
