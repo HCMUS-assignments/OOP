@@ -34,13 +34,22 @@ public:
     void writeStudentsIntoFile(const char* fileName);
 
     // 4. Đọc danh sách sinh viên từ file, xuất ra màn hình
-    void printStudents(const char* fileName);
+    void readStudents(const char* fileName);
 
     // 5. In danh sách sinh viên của một khóa học
     void printStudentsOfCourse();
 
     // 6. In thời khóa biểu của sinh viên(ds khóa học sinh viên đã đăng ký)
     void printSchedule();
+
+    // 7. In danh sách khóa học
+    void printCourses();
+
+    // 8. In danh sách sinh viên
+    void printListStudents();
+
+    // 9. In thông tin 1 khóa học
+    void printInfoCourse();
 
     // --------------------------------------------------------
 

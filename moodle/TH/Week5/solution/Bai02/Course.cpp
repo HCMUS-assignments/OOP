@@ -25,17 +25,18 @@ Course::Course(char *id, char *name, char *schedule, char *list)
     string dayName_str = "";
     string morning = "";
     string afternoon = "";
-    
+
     while (schedule_str.length() > 0)
     {
+        cout << "\nSchedule: " << schedule_str << endl;
         // get day name
         int pos = schedule_str.find(":");
         dayName_str = schedule_str.substr(0, pos);
         schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
 
         // get morning and afternoon
-        // ignore ( 
-        schedule_str = schedule_str.substr(1, schedule_str.length() - 1);
+        // ignore ( and space
+        schedule_str = schedule_str.substr(2, schedule_str.length() - 2);
         pos = schedule_str.find(",");
         morning = schedule_str.substr(0, pos);
         schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
@@ -45,7 +46,9 @@ Course::Course(char *id, char *name, char *schedule, char *list)
         schedule_str = schedule_str.substr(pos + 1, schedule_str.length() - pos - 1);
 
         // add day to schedule
-        Day day((char*) dayName_str.c_str(), (char*) morning.c_str(), (char*) afternoon.c_str());
+        cout << "morning: " << morning << endl;
+        cout << "afternoon: " << afternoon << endl;
+        Day day((char *)dayName_str.c_str(), (char *)morning.c_str(), (char *)afternoon.c_str());
         _schedule.push_back(day);
 
         // ignore , and space if have
@@ -60,7 +63,8 @@ Course::Course(char *id, char *name, char *schedule, char *list)
     // ignore { and }
     string roster_str = list;
     roster_str = roster_str.substr(1, roster_str.length() - 2);
-    while (roster_str.length() > 0) {
+    while (roster_str.length() > 0)
+    {
         // ignore number order
         int pos = roster_str.find("(");
         roster_str = roster_str.substr(pos + 1, roster_str.length() - pos - 1);
@@ -71,7 +75,7 @@ Course::Course(char *id, char *name, char *schedule, char *list)
         string name_str = roster_str.substr(0, pos);
 
         // add student to roster
-        _list.addStudent((char*) id_str.c_str(), (char*) name_str.c_str());
+        _list.addStudent((char *)id_str.c_str(), (char *)name_str.c_str());
 
         // ignore )
         roster_str = roster_str.substr(pos + 1, roster_str.length() - pos - 1);
@@ -94,12 +98,12 @@ Course::Course(const Course &other)
 
     // list day
     _schedule.clear();
-    cout << "add schedule course...\n";
+    // cout << "add schedule course...\n";
     for (int i = 0; i < other._schedule.size(); i++)
     {
         _schedule.push_back(other._schedule[i]);
     }
-    cout << "add schedule course success...\n";
+    // cout << "add schedule course success...\n";
 }
 
 Course &Course::operator=(Course &other)
@@ -121,6 +125,7 @@ Course &Course::operator=(Course &other)
         strcpy(_name, other._name);
 
         // list day
+        _schedule.clear();
         for (int i = 0; i < other._schedule.size(); i++)
         {
             _schedule.push_back(other._schedule[i]);
@@ -145,10 +150,10 @@ void Course::setName(char *name)
 
 void Course::setSchedule(char *nameDay, char *time)
 {
-    cout << "... start set _schedule...\n";
-    cout << "size: " << getSizeSchedule() << endl;
-    cout << "\nName day: " << nameDay << endl;
-    cout << "\nTime: " << time << endl;
+    // cout << "... start set _schedule...\n";
+    // cout << "size: " << getSizeSchedule() << endl;
+    // cout << "\nName day: " << nameDay << endl;
+    // cout << "\nTime: " << time << endl;
 
     Day newDay;
     char *exist = new char[2];
@@ -157,7 +162,7 @@ void Course::setSchedule(char *nameDay, char *time)
     strcpy(exist, "x");
     strcpy(notExist, " ");
     newDay.setNameDay(nameDay);
-    cout << "\n...set name succces...\n";
+    // cout << "\n...set name succces...\n";
 
     if (strcmp(time, "Morning") == 0)
     {
@@ -171,13 +176,13 @@ void Course::setSchedule(char *nameDay, char *time)
     }
     _schedule.push_back(newDay);
 
-    cout << "... end set _schedule...\n";
-    cout << "size: " << getSizeSchedule() << endl;
-    cout << "Schedule: \n";
-    for (int i = 0; i < _schedule.size(); i++)
-    {
-        cout << "Day " << i + 1 << " : " << _schedule[i].getNameDay() << " " << _schedule[i].getSubMorning() << " " << _schedule[i].getSubAfternoon() << endl;
-    }
+    // cout << "... end set _schedule...\n";
+    // cout << "size: " << getSizeSchedule() << endl;
+    // cout << "Schedule: \n";
+    // for (int i = 0; i < _schedule.size(); i++)
+    // {
+    //     cout << "Day " << i + 1 << " : " << _schedule[i].getNameDay() << " " << _schedule[i].getSubMorning() << " " << _schedule[i].getSubAfternoon() << endl;
+    // }
 }
 
 void Course::clearSchedule()
@@ -206,31 +211,49 @@ vector<Day> Course::getSchedule()
     return _schedule;
 }
 
-string Course::getScheduleStr() {
+string Course::getScheduleStr()
+{
+    // cout << "\nstart: string schedule...\n";
+
     string res = "";
-    for (int i = 0; i < _schedule.size(); i++) {
+    for (int i = 0; i < _schedule.size(); i++)
+    {
         res += _schedule[i].getNameDay();
         res += "(";
-        if (strcmp(_schedule[i].getSubMorning(), "x") == 0) {
+        if (strcmp(_schedule[i].getSubMorning(), "x") == 0)
+        {
             res += "1-4";
-        } else {
+        }
+        else
+        {
             res += "6-9";
         }
         res += ")";
-        if (i < _schedule.size() - 1) {
+        if (i < _schedule.size() - 1)
+        {
             res += ", ";
         }
     }
+    // cout << "\nend: string schedule...\n";
+    return res;
 }
 
-Roster Course::getRoster() {
+Roster Course::getRoster()
+{
     return _list;
 }
 
-int Course::getSizeCourse() {
+int Course::getSizeCourse()
+{
     return _list.getSize();
 }
 
-int Course::getMaxSizeOfCourse() {
+int Course::getMaxSizeOfCourse()
+{
     return _list.getMaxSize();
+}
+
+// add student to course
+void Course::addStudent(char* id, char* fullname) {
+    _list.push(id, fullname);
 }

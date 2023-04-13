@@ -122,12 +122,13 @@ void Student::setTimeTable(char *timeTable)
         timeTableStr = timeTableStr.substr(pos + 2, timeTableStr.length() - pos - 2);
         pos = timeTableStr.find_first_of(')');
         sub2 = timeTableStr.substr(0, pos);
-        _timeTable.setDay((char*) name.c_str(), (char*) sub1.c_str(), (char*) sub2.c_str());
+        _timeTable.setDay((char *)name.c_str(), (char *)sub1.c_str(), (char *)sub2.c_str());
         // ignore )
         timeTableStr = timeTableStr.substr(pos + 1, timeTableStr.length() - pos - 1);
         // ignore , if have
-        if (timeTableStr.length() > 0) {
-        timeTableStr = timeTableStr.substr(1, timeTableStr.length() - 1);
+        if (timeTableStr.length() > 0)
+        {
+            timeTableStr = timeTableStr.substr(1, timeTableStr.length() - 1);
         }
     }
 }
@@ -177,6 +178,7 @@ char *Student::getScheduleStr()
     for (int i = 0; i < days.size(); i++)
     {
         str += days[i];
+        // cout << "\nday: " << days[i] << endl;
         str += ": (";
         Day day = _timeTable.getAt(days[i]);
         str += day.getSubMorning();
@@ -190,7 +192,14 @@ char *Student::getScheduleStr()
         }
     }
     str += "}";
-    return (char *)str.c_str();
+    char* temp = new char[str.length()+1];
+    strcpy(temp, str.c_str());
+    return temp;
+}
+
+void Student::setTimeTable(char* nameDay, char* subj, char* time)
+{
+    _timeTable.setAt(nameDay, subj, time);
 }
 
 Schedule Student::getTimeTable()

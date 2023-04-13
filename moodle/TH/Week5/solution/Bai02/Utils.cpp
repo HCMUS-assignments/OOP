@@ -5,19 +5,23 @@ int Utils::Menu()
 {
     cout << endl
          << endl;
-    cout << setw(35) << setfill(' ') << "CHƯƠNG TRÌNH ĐĂNG KÝ KHÓA HỌC" << setw(35);
-    cout << endl;
-    cout << setw(20) << setfill('-') << "MENU" << setw(20) << setfill('-');
+    cout << setw(10) << setfill(' ') << "" << "CHƯƠNG TRÌNH ĐĂNG KÝ KHÓA HỌC" << setw(40) << setfill(' ');
+    cout << endl << endl << endl;
+    cout << setw(30) << setfill('-') << "MENU" << setw(30) << setfill('-') << "-" << endl;
     cout << "1. Đọc danh sách khóa học từ file. " << endl;
-    cout << "2. Đăng ký khóa học." << endl;
-    cout << "3. Ghi danh sách sinh viên lên file." << endl;
-    cout << "4. Đọc danh sách sinh viên từ file, xuất ra màn hình." << endl;
+    cout << "2. Đọc danh sách sinh viên từ file." << endl;
+    cout << "3. Đăng ký khóa học." << endl;
+    cout << "4. Ghi danh sách sinh viên lên file." << endl;
     cout << "5. In danh sách sinh viên của một khóa học. " << endl;
     cout << "6. In thời khóa biểu của sinh viên." << endl;
-    cout << "7. Thoát chương trình." << endl;
-    cout << setw(20) << setfill('-') << "----" << setw(20) << setfill('-');
+    cout << "7. In danh sách khóa học. " << endl;
+    cout << "8. In danh sách sinh viên. " << endl;
+    cout << "9. In thông tin một khóa học." << endl;
+    cout << "10. Thoát chương trình." << endl;
+    cout << setw(60) << setfill('-')  << "-" ;
 
-    cout << endl;
+    cout << setfill(' ') << endl << endl;
+    cout << "Nhập lựa chọn: ";
     int choice;
     fflush(stdin);
     cin >> choice;

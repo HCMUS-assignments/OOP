@@ -46,6 +46,9 @@ class Course {
         // capacity of course
         int getMaxSizeOfCourse();
 
+        // add student to course
+        void addStudent(char* id, char* fullname);
+
 
 
 

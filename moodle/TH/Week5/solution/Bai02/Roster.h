@@ -38,6 +38,9 @@ class Roster {
         // methods
         int getMaxSize();
 
+        // add student
+        void push(char* id, char* name);
+
 
 
 

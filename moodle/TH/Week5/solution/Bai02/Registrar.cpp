@@ -23,7 +23,9 @@ void Registrar::readCoursesFromFile(const char *fileName)
     }
     while (getline(fin, line))
     {
+        // cout << "\n...here...";
         vector<char *> info;
+        // cout << "\nline: " << line << endl;
 
         char *str = new char[line.length() + 1];
         strcpy(str, line.c_str());
@@ -31,28 +33,36 @@ void Registrar::readCoursesFromFile(const char *fileName)
         // start split string and set info to course
         // id
         char *token = strtok(str, ",");
-        info.push_back(token);
+        // cout << "\nToken: " << token ;
+        info.push_back(Utils::standardized(token));
+        // cout << "\npushed ... ";
         // name
         token = strtok(NULL, ",");
-        info.push_back(token);
+        info.push_back(Utils::standardized(token));
         // classes
-        token = strtok(NULL, "},");
+        token = strtok(NULL, "}");
 
         // add } to end of string
-        strcat(token, "}");
-        info.push_back(token);
+        string temp = token;
+        temp.append("}");
+        // cout <<"\nToken: " << temp;
+        info.push_back(Utils::standardized((char *)temp.c_str()));
 
         // list students
-        token = strtok(NULL, "}");
-        // add } to end of string
-        strcat(token, "}");
-        info.push_back(token);
+        // ignore ,
+        // cout << "\nsplit dssv";
+        token = strtok(NULL, ", ");
+        // cout << "\nToken: " << token ;
+        info.push_back(Utils::standardized(token));
 
         // add info to course
+        // cout << "\nstart to add course ...";
         Course course(info[0], info[1], info[2], info[3]);
         _listOfCourses.push_back(course);
+        // cout << "\nafter";
     }
     fin.close();
+    cout << "\n...finished ...\n";
 }
 
 // 2. Sinh viên đăng ký khóa học
@@ -65,6 +75,7 @@ void Registrar::registerCourse()
     while (true)
     {
         cout << "\nEnter your ID: ";
+        fflush(stdin);
         getline(cin, id);
 
         // find and return student info if have
@@ -96,7 +107,7 @@ void Registrar::registerCourse()
         getline(cin, line);
         if (line == "y")
         {
-            cout << "\nList of courses bellow: \n";
+            cout << "\nList of courses bellow: \n\n";
             for (int i = 0; i < _listOfCourses.size(); i++)
             {
                 cout << _listOfCourses[i].getId() << " - " << _listOfCourses[i].getName() << " - ";
@@ -110,11 +121,12 @@ void Registrar::registerCourse()
     }
 
     // 2. print list course that student can register: not yet register (ID - Name - Schedule - Size)
-    cout << "\nList of courses bellow: \n";
+    cout << "\nList of courses bellow: \n\n";
     for (int i = 0; i < _listOfCourses.size(); i++)
     {
         cout << _listOfCourses[i].getId() << " - " << _listOfCourses[i].getName() << " - ";
-        cout << _listOfCourses[i].getScheduleStr() << " - " << _listOfCourses[i].getRoster().getSizeStr() << endl;
+        cout << _listOfCourses[i].getScheduleStr() << " - ";
+        cout << _listOfCourses[i].getRoster().getSizeStr() << endl;
     }
 
     // 3. enter id of course that student want to register
@@ -202,29 +214,50 @@ void Registrar::registerCourse()
     // --------------- handle register course------------------------
 
     // 4.2 add course into timetable of student
-    for (int i = 0; i < courseSchedule.size(); i++)
+
+    for (int j = 0; j < _listOfStudents.size(); j++)
     {
-        char *subject = new char[strlen(course.getId()) + 1];
-        strcpy(subject, course.getId());
-
-        char *time;
-        if (strcmp(courseSchedule[i].getSubMorning(), "x") == 0)
+        if (strcmp(_listOfStudents[j].getId(), id.c_str()) == 0)
         {
-            subject = new char[strlen(courseSchedule[i].getSubMorning()) + 1];
-            strcpy(subject, courseSchedule[i].getSubMorning());
-            time = new char[strlen("morning") + 1];
-            strcpy(time, "morning");
-        }
-        else
-        {
-            subject = new char[strlen(courseSchedule[i].getSubAfternoon()) + 1];
-            strcpy(subject, courseSchedule[i].getSubAfternoon());
-            time = new char[strlen("afternoon") + 1];
-            strcpy(time, "afternoon");
-        }
+            cout << "\nadd time table...\n";
+            cout << "Num classes: " << courseSchedule.size() << endl;
+            for (int i = 0; i < courseSchedule.size(); i++)
+            {
+                char *subject = new char[strlen(course.getId()) + 1];
+                strcpy(subject, course.getId());
 
-        studentTimetable.setAt(courseSchedule[i].getNameDay(), subject, time);
+                char *time;
+                if (strcmp(courseSchedule[i].getSubMorning(), "x") == 0)
+                {
+                    strcpy(subject, courseSchedule[i].getSubMorning());
+                    time = new char[strlen("morning") + 1];
+                    strcpy(time, "morning");
+                }
+                else
+                {
+                    strcpy(subject, courseSchedule[i].getSubAfternoon());
+                    time = new char[strlen("afternoon") + 1];
+                    strcpy(time, "afternoon");
+                }
+                cout << "\nstart to set time table...\n";
+                cout << "\nSubject: " << subject << endl;
+                _listOfStudents[j].setTimeTable(courseSchedule[i].getNameDay(), subject, time);
+            }
+            break;
+        }
     }
+
+    // add student to course
+    for (int i = 0; i < _listOfCourses.size(); i++)
+    {
+        if (strcmp(_listOfCourses[i].getId(), idCourse.c_str()) == 0)
+        {
+            cout << "\n...add student to course...";
+            _listOfCourses[i].addStudent(student.getId(), student.getFullname());
+            break;
+        }
+    }
+
     cout << "\n...register course successfully....\n";
 }
 
@@ -239,10 +272,11 @@ void Registrar::writeStudentsIntoFile(const char *fileName)
         fout << _listOfStudents[i].getScheduleStr() << endl;
     }
     fout.close();
+    cout << "\n...finished...\n";
 }
 
 // 4. Đọc danh sách sinh viên từ file, xuất ra màn hình
-void Registrar::printStudents(const char *fileName)
+void Registrar::readStudents(const char *fileName)
 {
     _listOfStudents.clear();
     string line;
@@ -252,6 +286,7 @@ void Registrar::printStudents(const char *fileName)
         cout << "\n...Error opening " << fileName << " ... \n";
         return;
     }
+    int i = 1;
     while (getline(fin, line))
     {
         // handle reading line
@@ -277,12 +312,17 @@ void Registrar::printStudents(const char *fileName)
         schedule = line;
 
         // add info to student
-        Student student((char *)id.c_str(), (char *)name.c_str(), (char *)birthday.c_str(), (char *)address.c_str());
-        student.setTimeTable((char *)schedule.c_str());
+        // cout << "\nbefore add info...\n";
+        Student student(Utils::standardized((char *)id.c_str()), Utils::standardized((char *)name.c_str()), Utils::standardized((char *)birthday.c_str()), Utils::standardized((char *)address.c_str()));
+        // cout << "\nbefore set time table...\n";
+        student.setTimeTable(Utils::standardized((char *)schedule.c_str()));
 
+        // cout << "\nbefore push ...\n";
         _listOfStudents.push_back(student);
     }
     fin.close();
+
+    cout << "\nfinished...\n";
 }
 
 // 5. In danh sách sinh viên của một khóa học
@@ -292,6 +332,7 @@ void Registrar::printStudentsOfCourse()
     while (true)
     {
         cout << "enter id of course: ";
+        fflush(stdin);
         getline(cin, id);
 
         // check if course is exist
@@ -311,6 +352,7 @@ void Registrar::printStudentsOfCourse()
             cout << "\n...Course not found... please enter again ...\n";
         }
     }
+    cout << "\n...finished...\n";
 }
 
 // 6. In thời khóa biểu của sinh viên(ds khóa học sinh viên đã đăng ký)
@@ -319,7 +361,8 @@ void Registrar::printSchedule()
     string id;
     while (true)
     {
-        cout << "enter id of student: ";
+        cout << "Enter id of student: ";
+        fflush(stdin);
         getline(cin, id);
 
         // check if student is exist
@@ -338,37 +381,93 @@ void Registrar::printSchedule()
             cout << "\n...Student not found... please enter again ...\n";
         }
     }
+    cout << "\n...finished...\n";
+}
+
+// 7. In danh sách khóa học
+void Registrar::printCourses()
+{
+    for (int i = 0; i < _listOfCourses.size(); i++)
+    {
+        cout << _listOfCourses[i].getId() << " - " << _listOfCourses[i].getName() << " - ";
+        cout << _listOfCourses[i].getScheduleStr() << " - ";
+        cout << _listOfCourses[i].getRoster().getSizeStr() << endl;
+    }
+}
+
+// 8. In danh sách sinh viên
+void Registrar::printListStudents()
+{
+    for (int i = 0; i < _listOfStudents.size(); i++)
+    {
+        cout << i + 1 << ". " << _listOfStudents[i].getId() << ", " << _listOfStudents[i].getFullname() << ", ";
+        cout << _listOfStudents[i].getBirthday() << ", " << _listOfStudents[i].getAddress() << endl;
+    }
+}
+
+// 9. In thông tin 1 khóa học
+void Registrar::printInfoCourse()
+{
+    cout << "Enter ID of course: ";
+    string idCourse;
+    fflush(stdin);
+    getline(cin, idCourse);
+    for (int i = 0; i < _listOfCourses.size(); i++)
+    {
+        if (strcmp(idCourse.c_str(), _listOfCourses[i].getId()) == 0)
+        {
+            cout << "ID: " << idCourse << endl;
+            cout << "Name: " << _listOfCourses[i].getName() << endl;
+            cout << "Schedule: " << _listOfCourses[i].getScheduleStr() << endl;
+            break;
+        }
+    }
 }
 
 // -----------------------------------------------
 
-void Registrar::run() {
-    int choice ;
-    do {
+void Registrar::run()
+{
+    int choice;
+    do
+    {
         choice = Utils::Menu();
-        switch (choice ) {
-            case 1:
-                readCoursesFromFile("listOfCourses.txt");
-                break;
-            case 2:
-                registerCourse();
-                break;
-            case 3:
-                writeStudentsIntoFile("output3_dssv.txt");
-                break;
-            case 4:
-                printStudents("listOfStudents.txt");
-                break;
-            case 5:
-                printStudentsOfCourse();
-                break;
-            case 6: 
-                printSchedule();
-                break;
-            default:
-                break;
+        switch (choice)
+        {
+        case 1:
+            readCoursesFromFile("listOfCourses.txt");
+            break;
+        case 2:
+            readStudents("listOfStudents.txt");
+
+            break;
+        case 3:
+            registerCourse();
+
+            break;
+        case 4:
+            writeStudentsIntoFile("output3_dssv.txt");
+
+            break;
+        case 5:
+            printStudentsOfCourse();
+            break;
+        case 6:
+            printSchedule();
+            break;
+        case 7:
+            printCourses();
+            break;
+        case 8:
+            printListStudents();
+            break;
+        case 9:
+            printInfoCourse();
+            break;
+        default:
+            break;
         }
 
-    } while (choice != 7) ;
+    } while (choice != 10);
     cout << "\n...Chương trình kết thúc...\n";
 }

@@ -44,15 +44,29 @@ void Schedule::setAt(char *name, char *subject, char *time)
 {
     for (auto i = 0; i < week.size(); i++)
     {
+        cout << "\ncome here...\n";
         if (strcmp(week[i].getNameDay(), name) == 0)
         {
+            cout << "\n...setting time table\n";
+            if (strcmp(time, "morning") == 0)
+            {
+                week[i].setSubMorning(subject);
+            }
+            else
+            {
+                week[i].setSubAfternoon(subject);
+            }
+            break;
         }
     }
 }
 
-void Schedule::setDay(char *name, char *sub1, char *sub2) {
-    for (int i = 0; i < week.size() ; i++) {
-        if (strcmp(week[i].getNameDay(), name) == 0) {
+void Schedule::setDay(char *name, char *sub1, char *sub2)
+{
+    for (int i = 0; i < week.size(); i++)
+    {
+        if (strcmp(week[i].getNameDay(), name) == 0)
+        {
             week[i].setSubMorning(sub1);
             week[i].setSubAfternoon(sub2);
             return;
@@ -63,32 +77,33 @@ void Schedule::setDay(char *name, char *sub1, char *sub2) {
 void Schedule::print()
 {
     // print the name day [Mon, Tues ,. ...]
-    cout << endl << "|   ";
+    cout << endl
+         << "|   ";
     for (int i = 0; i < week.size(); i++)
     {
-        cout << setw(10) << week[i].getNameDay() << setfill(' ');
-        cout << "|"; 
-        
+        cout << setw(5) << setfill(' ') << week[i].getNameDay() << setw(5) << setfill(' ');
+        cout << "|";
     }
     // print the subject of morning
-    cout << endl << "|   ";
+    cout << endl
+         << "|   ";
     for (int i = 0; i < week.size(); i++)
     {
-        cout << setw(10) << week[i].getSubMorning() << setfill(' ');
-        cout << "|"; 
-        
+        cout << setw(5) << setfill(' ') << week[i].getSubMorning() << setw(5) << setfill(' ');
+
+        cout << "|";
     }
 
     // print the subject of afternoon
-    cout << endl << "|   ";
+    cout << endl
+         << "|   ";
     for (int i = 0; i < week.size(); i++)
     {
-        cout << setw(10) << week[i].getSubAfternoon() << setfill(' ');
-        cout << "|"; 
-        
+        cout << setw(5) << setfill(' ') << week[i].getSubAfternoon() << setw(5) << setfill(' ');
+
+        cout << "|";
     }
 
-    cout << endl << endl;
-
-    
+    cout << endl
+         << endl;
 }

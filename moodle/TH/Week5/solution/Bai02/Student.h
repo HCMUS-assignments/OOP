@@ -40,6 +40,7 @@ public:
     // relate to schedule
     char* getScheduleStr();
     void printSchedule();
+    void setTimeTable(char* nameDay, char* subj, char* time);
     Schedule getTimeTable();
     
 
