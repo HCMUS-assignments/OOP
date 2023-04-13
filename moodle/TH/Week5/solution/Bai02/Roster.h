@@ -15,12 +15,18 @@ struct Info {
 class Roster {
     private:
         vector<Info> studentNames;
-        int cap;    // max = 40
+        int _cap;    // max = 40
     public:
         // constructor
         Roster();
+        Roster(int capacity);
         Roster(const Roster& other);
         Roster& operator= (Roster &other);
+
+
+        // setters
+        // resize of course (change max cap) 
+        void reSize(int max) ;
 
         // getters
         int getSize();
@@ -28,6 +34,10 @@ class Roster {
 
         void addStudent(char* id, char* name);
         void print();
+
+        // methods
+        int getMaxSize();
+
 
 
 

@@ -31,11 +31,21 @@ class Course {
         char* getId();
         char* getName();
 
+        // methods with schedule
         int getSizeSchedule();
         vector<Day> getSchedule();
         string getScheduleStr();
 
+        // list of students joined this course
         Roster getRoster();
+
+        // get size of this course
+        // number of student currently
+        int getSizeCourse();    
+
+        // capacity of course
+        int getMaxSizeOfCourse();
+
 
 
 

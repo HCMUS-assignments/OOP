@@ -1,12 +1,16 @@
 #include "Roster.h"
 
 // define
-Roster::Roster() {
-    cap = 40;
+Roster::Roster() {  
+    _cap = 40;   // _capacity default
+}
+
+Roster::Roster(int capacity) {
+    _cap = capacity;
 }
 
 Roster::Roster(const Roster& other) {
-    cap = other.cap;
+    _cap = other._cap;
     int size = other.studentNames.size();
     for (int i = 0; i < size; i++) {
         Info info;
@@ -22,7 +26,7 @@ Roster::Roster(const Roster& other) {
 
 Roster& Roster::operator=(Roster &other) {
     if (this != &other) {
-        cap = other.cap;
+        _cap = other._cap;
         int size = other.studentNames.size();
         for (int i = 0; i < size; i++) {
             Info info;
@@ -38,12 +42,19 @@ Roster& Roster::operator=(Roster &other) {
     return *this;
 } 
 
+
+// setters
+void Roster::reSize(int max) {
+    _cap = max;
+}
+
+// getters
 int Roster::getSize() {
     return studentNames.size();
 }
 
 char* Roster::getSizeStr() {
-    string res = to_string(getSize()) + "/" + to_string(cap);
+    string res = to_string(getSize()) + "/" + to_string(_cap);
     char* str = NULL;
     strcpy(str, res.c_str());
     return str;
@@ -64,4 +75,9 @@ void Roster::print() {
     for (int i = 0; i < studentNames.size(); i++) {
         cout << i + 1 << ". " << studentNames[i]._id << " - " << studentNames[i]._name << endl;
     }
+}
+
+// other methods
+int Roster::getMaxSize() {
+    return _cap;
 }

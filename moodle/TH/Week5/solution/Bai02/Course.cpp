@@ -226,3 +226,11 @@ string Course::getScheduleStr() {
 Roster Course::getRoster() {
     return _list;
 }
+
+int Course::getSizeCourse() {
+    return _list.getSize();
+}
+
+int Course::getMaxSizeOfCourse() {
+    return _list.getMaxSize();
+}
