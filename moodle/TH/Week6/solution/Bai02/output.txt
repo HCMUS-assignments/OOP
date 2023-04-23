@@ -1,0 +1,16 @@
+SX001 - Nguyen Van A - 25/04/2003 - Quang Binh - 2.000.000
+CN001 - Nguyen Van B - 26/04/2003 - Quang Ninh - 4.000.000
+CN002 - Nguyen Van C - 27/04/2003 - Quang Tri - 6.000.000
+SX002 - Nguyen Van D - 28/04/2003 - Quang Nam - 8.000.000
+SX003 - Nguyen Van E - 29/04/2003 - Quang Ngai - 10.000.000
+SX004 - Nguyen Van F - 30/04/2003 - Binh Dinh - 12.000.000
+CN003 - Nguyen Van G - 31/05/2003 - TT Hue - 14.000.000
+SX005 - Nguyen Van H - 30/05/2003 - Nghe An - 16.000.000
+SX006 - Nguyen Van I - 29/05/2003 - Ha Tinh - 18.000.000
+CN004 - Nguyen Van J - 28/05/2003 - Thanh Hoa - 1.800.000
+SX007 - Nguyen Van K - 27/05/2003 - Binh Thuan - 1.600.000
+SX008 - Nguyen Van L - 26/05/2003 - Ninh Thuan - 1.400.000
+CN005 - Nguyen Van M - 25/05/2003 - Dak Lak - 1.200.000
+CN006 - Nguyen Van N - 24/05/2003 - Da Lat - 1.000.000
+SX009 - Nguyen Van O - 23/05/2003 - Bac Lieu - 800.000
+CN007 - Nguyen Van P - 20/05/2003 - Bac Ninh - 600.000
