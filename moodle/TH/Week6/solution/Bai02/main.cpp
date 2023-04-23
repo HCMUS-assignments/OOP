@@ -30,7 +30,8 @@ int main()
         cout << "9. Số nhân viên sinh trong tháng 5." << endl;
         cout << "10. Thêm 1 nhân viên vào danh sách." << endl;
         cout << "11. Xóa 1 nhân viên khỏi danh sách." << endl;
-        cout << "12. Thoát." << endl;
+        cout << "12. Ghi tất cả các nhân viên có lương nhỏ hơn lương trung bình của công ty lên file 'emp_LowerAvgSalary.dat'" << endl;
+        cout << "13. Thoát." << endl;
         cout << setw(84) << setfill('_') << "" << endl;
         cout << "\nChọn chức năng: ";
         int choice;
@@ -75,8 +76,11 @@ int main()
         case 11:
             company.deleteEmployee();
             break;
-
         case 12:
+            company.writeEmployeeLowerAvgSalaryToFile();
+            break;
+
+        case 13:
             cout << endl
                  << setw(40) << setfill('_') << "END" << setw(40) << setfill('_') << "" << endl;
             return 225;

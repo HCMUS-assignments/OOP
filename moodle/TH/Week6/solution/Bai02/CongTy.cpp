@@ -162,7 +162,7 @@ void CongTy::write()
     }
     for (Node *p = head; p != NULL; p = p->pNext)
     {
-        fout << p->data->getID() << " - " << p->data->getFullName() << " - " << p->data->getBirthdate() << " - " << p->data->getAddress() << " - " << convertSalary(p->data->getSalary()) << endl;
+        fout << p->data->getID() << " - " << p->data->getFullName() << " - " << p->data->getBirthdate() << " - " << p->data->getAddress() << " - " << p->data->getNum() << endl;
     }
     fout.close();
     cout << "\nDa ghi du lieu vao file ds_NhanVien.dat\n";
@@ -471,7 +471,7 @@ void CongTy::writeEmployeeLowerAvgSalaryToFile()
         cout << "\nKhong mo duoc file emp_LowerAvgSalary.dat";
         return;
     }
-    fout << avgSalaryOfAll() << endl;
+    fout << "Luong TB: " <<  convertSalary(int(avgSalaryOfAll())) << endl;
     for (Node *p = head; p != NULL; p = p->pNext)
     {
         if (p->data->getSalary() < avgSalaryOfAll())
