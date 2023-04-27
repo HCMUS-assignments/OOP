@@ -14,4 +14,4 @@
  - [ Program to manage the course registration system](./moodle/TH/Week5/solution/Bai02)
  - [ Employee information management program](./moodle/TH/Week6/solution/Bai02)
  - [Gunner game program](./project)
- - [Coffee shop management module](./java/docs/Assignment_OOP_2022_VN/Source)
+ - [Coffee shop management module](./java/solutions/project)
