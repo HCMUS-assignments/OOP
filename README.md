@@ -8,3 +8,10 @@
 <li> <a href="./moodle"> Assignments from moodle fit@hcmus </a> </li>
 <li> <a href="./test"> Middle exam and final exam of the previous courses </a> </li>
 </ul>
+
+#### List of a few small projects in this subject below:
+ - [ Student Management Program](./moodle/TH/Week2/Bai03)
+ - [ Program to manage the course registration system](./moodle/TH/Week5/solution/Bai02)
+ - [ Employee information management program](./moodle/TH/Week6/solution/Bai02)
+ - [Gunner game program](./project)
+ - [Coffee shop management module](./java/docs/Assignment_OOP_2022_VN/Source)
