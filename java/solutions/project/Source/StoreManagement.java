@@ -63,7 +63,30 @@ public class StoreManagement {
     // requirement 1
     public ArrayList<Staff> loadStaffs(String filePath) {
         //code here and modify the return value
-        return null;
+        ArrayList<Staff> staffsResult  = new ArrayList<Staff>();
+        ArrayList<String> staffs = loadFile(filePath);
+
+        for (String staff  : staffs) {
+            String [] information = staff.split(",");
+            switch (information.length) {
+                case 3: 
+                    staffsResult.add(new SeasonalStaff(information[0], information[1], information[2]);)
+                    break;
+
+                case 4:
+                    staffsResult.add(new FullTimeStaff(information[0], information[1], information[2], information[3]));
+                    break;
+
+                case 5:
+                    staffsResult.add(new Manager(information[0], information[1], information[2], information[3], information[4]));
+                    break;
+
+                default: 
+                    System.out.println("Error loadStaff: wrong format staff information !");
+                    break;
+            }
+        }
+        return staffsResult;
     }
 
     // requirement 2

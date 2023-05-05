@@ -1,0 +1,2 @@
+JAVAC = javac
+
