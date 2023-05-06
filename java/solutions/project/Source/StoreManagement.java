@@ -70,7 +70,7 @@ public class StoreManagement {
             String [] information = staff.split(",");
             switch (information.length) {
                 case 3: 
-                    staffsResult.add(new SeaSonalStaff(information[0], information[1], Integer.parseInt(information[2])));
+                    staffsResult.add(new SeasonalStaff(information[0], information[1], Integer.parseInt(information[2])));
                     break;
 
                 case 4:
@@ -90,27 +90,34 @@ public class StoreManagement {
     }
 
     // requirement 2
-    public ArrayList<SeaSonalStaff> getTopFiveSeasonalStaffsHighSalary() {
+    public ArrayList<SeasonalStaff> getTopFiveSeasonalStaffsHighSalary() {
         //code here and modify the return value
-        ArrayList<SeaSonalStaff> listSeaSonal = new ArrayList<SeaSonalStaff>();
+        ArrayList<SeasonalStaff> listSeaSonal = new ArrayList<SeasonalStaff>();
         for (Staff staff : staffs) {
-            if (staff instanceof SeaSonalStaff) {
-                listSeaSonal.add((SeaSonalStaff)staff);
+            if (staff instanceof SeasonalStaff) {
+                listSeaSonal.add((SeasonalStaff)staff);
             }
         }
-        // Collections.sort(listSeaSonal, new Comparator<SeaSonalStaff>() {
-        //     @Override
-        //     public int compare(SeaSonalStaff s1, SeaSonalStaff s2) {
-                // if (s1.paySalary() < s2.paySalary()) {
-                //     return 1;
-                // } else if (s1.paySalary() > s2.paySalary()) {
-                //     return -1;
-                // } else {
-                //     return 0;
-                // }
-        //     }
-        // });
-        ArrayList<SeaSonalStaff> topFive = new ArrayList<SeaSonalStaff>();
+
+        Map<String, Integer> ID_WTime = new HashMap<String, Integer>();
+        for (String line : workingTime) {
+            String[] token = line.split(",");
+            ID_WTime.put(token[0], Integer.parseInt(token[1]));
+        }
+
+        Collections.sort(listSeaSonal, new Comparator<SeasonalStaff>() {
+            @Override
+            public int compare(SeasonalStaff s1, SeasonalStaff s2) {
+                if (s1.paySalary(ID_WTime.get(s1.getsID())) < s2.paySalary(ID_WTime.get(s2.getsID()))) {
+                    return 1;
+                } else if (s1.paySalary(ID_WTime.get(s1.getsID())) > s2.paySalary(ID_WTime.get(s2.getsID()))) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        ArrayList<SeasonalStaff> topFive = new ArrayList<SeasonalStaff>();
         for (int i = 0; i < 5; i++) {
             topFive.add(listSeaSonal.get(i));
         }
@@ -120,10 +127,18 @@ public class StoreManagement {
     // requirement 3
     public ArrayList<FullTimeStaff> getFullTimeStaffsHaveSalaryGreaterThan(int lowerBound) {
         //code here and modify the return value
+        Map<String, Integer> ID_WTime = new HashMap<String, Integer>();
+        for (String line : workingTime) {
+            String[] token = line.split(",");
+            ID_WTime.put(token[0], Integer.parseInt(token[1]));
+        }
+
         ArrayList<FullTimeStaff> result = new ArrayList<FullTimeStaff>();
         for (Staff staff : staffs) {
             if (staff instanceof FullTimeStaff) {
-                
+                if (staff.paySalary(ID_WTime.get(staff.getsID())) > lowerBound) {
+                    result.add((FullTimeStaff)staff);
+                }
             }
         }
         return result;
