@@ -70,15 +70,15 @@ public class StoreManagement {
             String [] information = staff.split(",");
             switch (information.length) {
                 case 3: 
-                    staffsResult.add(new SeasonalStaff(information[0], information[1], information[2]);)
+                    staffsResult.add(new SeaSonalStaff(information[0], information[1], Integer.parseInt(information[2])));
                     break;
 
                 case 4:
-                    staffsResult.add(new FullTimeStaff(information[0], information[1], information[2], information[3]));
+                    staffsResult.add(new FullTimeStaff(information[0], information[1], Integer.parseInt(information[2]), Double.parseDouble(information[3])));
                     break;
 
                 case 5:
-                    staffsResult.add(new Manager(information[0], information[1], information[2], information[3], information[4]));
+                    staffsResult.add(new Manager(information[0], information[1], Integer.parseInt(information[2]), Double.parseDouble(information[3]), Integer.parseInt(information[4])));
                     break;
 
                 default: 
@@ -90,21 +90,53 @@ public class StoreManagement {
     }
 
     // requirement 2
-    public ArrayList<SeasonalStaff> getTopFiveSeasonalStaffsHighSalary() {
+    public ArrayList<SeaSonalStaff> getTopFiveSeasonalStaffsHighSalary() {
         //code here and modify the return value
-        return null;
+        ArrayList<SeaSonalStaff> listSeaSonal = new ArrayList<SeaSonalStaff>();
+        for (Staff staff : staffs) {
+            if (staff instanceof SeaSonalStaff) {
+                listSeaSonal.add((SeaSonalStaff)staff);
+            }
+        }
+        // Collections.sort(listSeaSonal, new Comparator<SeaSonalStaff>() {
+        //     @Override
+        //     public int compare(SeaSonalStaff s1, SeaSonalStaff s2) {
+                // if (s1.paySalary() < s2.paySalary()) {
+                //     return 1;
+                // } else if (s1.paySalary() > s2.paySalary()) {
+                //     return -1;
+                // } else {
+                //     return 0;
+                // }
+        //     }
+        // });
+        ArrayList<SeaSonalStaff> topFive = new ArrayList<SeaSonalStaff>();
+        for (int i = 0; i < 5; i++) {
+            topFive.add(listSeaSonal.get(i));
+        }
+        return topFive;
     }
 
     // requirement 3
     public ArrayList<FullTimeStaff> getFullTimeStaffsHaveSalaryGreaterThan(int lowerBound) {
         //code here and modify the return value
-        return null;
+        ArrayList<FullTimeStaff> result = new ArrayList<FullTimeStaff>();
+        for (Staff staff : staffs) {
+            if (staff instanceof FullTimeStaff) {
+                
+            }
+        }
+        return result;
     }
 
     // requirement 4
     public double totalInQuarter(int quarter) {
         double total = 0;
         // code here
+
+
+
+
         return total;
     }
 
