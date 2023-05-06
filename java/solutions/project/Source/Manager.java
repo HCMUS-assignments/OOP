@@ -1,8 +1,8 @@
 public class Manager extends FullTimeStaff {
     private int allowance;
 
-    public Manager (String sID, String sName, int baseSalary, int bonusRate, int allowance) {
-        super.FullTimeStaff(sID, sName, baseSalary, bonusRate);
+    public Manager (String sID, String sName, int baseSalary, double bonusRate, int allowance) {
+        super(sID, sName, baseSalary, bonusRate);
         this.allowance = allowance;
     }
 

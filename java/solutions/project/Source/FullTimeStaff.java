@@ -2,8 +2,8 @@ public class FullTimeStaff extends Staff {
     protected int baseSalary;
     protected double bonusRate;
 
-    public FullTimeStaff(String sID, String sName, int baseSalary, int bonusRate) {
-        super.Staff(sID, sName);
+    public FullTimeStaff(String sID, String sName, int baseSalary, double bonusRate) {
+        super(sID, sName);
         this.baseSalary = baseSalary;
         this.bonusRate = bonusRate;
     }

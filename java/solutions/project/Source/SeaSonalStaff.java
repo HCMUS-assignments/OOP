@@ -1,8 +1,8 @@
-public class SeasonalStaff extends Staff {
+public class SeaSonalStaff extends Staff {
     private int hourlyWage;
 
-    public SeasonalStaff(String sID, String sName, int hourlyWage) {
-        super.Staff(sID, sName);
+    public SeaSonalStaff(String sID, String sName, int hourlyWage) {
+        super(sID, sName);
         this.hourlyWage = hourlyWage;
     }
 
