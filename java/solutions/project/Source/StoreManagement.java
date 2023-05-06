@@ -144,13 +144,46 @@ public class StoreManagement {
         return result;
     }
 
+    // method supply for requirement 4 and 5
+    Map<String, Integer> initTotalBill() {
+        // convert  drinks into map(K,V)
+        Map<String, Integer> Name_Price = new HashMap<String, Integer>();
+        for (Drink drink : drinks) {
+            Name_Price.put(drink.getdName(), drink.getPrice());
+        }
+
+        Map<String, String> HD_Name_SL = new HashMap<String, String>();
+        for (InvoiceDetails inDetails : invoiceDetails) {
+            String Name_SL = inDetails.getDName() + "," + inDetails.getAmount();
+            HD_Name_SL.put(inDetails.getInvoiceID(), Name_SL);
+        }
+
+        Map<String, Integer> result = new HashMap<String, Integer>(); // MaHD, Total price
+        for (Invoice temp : invoices) {
+            String[] token = HD_Name_SL.get(temp.getInvoiceID()).split(",");
+            int price = Name_Price.get(token[0]);
+            int quantity = Integer.parseInt(token[1]);
+            result.put(temp.getInvoiceID(), price * quantity);
+        }
+        return result;
+    }
+
     // requirement 4
     public double totalInQuarter(int quarter) {
+        Map<String, Integer> bills = initTotalBill();
+        
         double total = 0;
         // code here
+        int firstMonth = (quarter - 1) * 3 + 1;
+        int lastMonth = firstMonth + 2;
 
-
-
+        for (Invoice invoice : invoices) {
+            String[] token = invoice.getDate().split("/");
+            int m = Integer.parseInt(token[1]);
+            if ( m >= firstMonth && m <= lastMonth ) {
+                total += bills.get(invoice.getInvoiceID());
+            }
+        }
 
         return total;
     }
@@ -159,6 +192,45 @@ public class StoreManagement {
     public Staff getStaffHighestBillInMonth(int month) {
         Staff maxStaff = null;
         //code here
+        Map<String, Integer> bills = initTotalBill();       // MaHD - Total price
+
+        Map<String, Integer> staffBill = new HashMap<String, Integer>();   // MaNV - Total bill
+
+        for (Invoice in : invoices) {
+            String[] token = in.getDate().split("/");
+            int m = Integer.parseInt(token[1]);
+            if (m == month) {
+                String idStaff = in.getStaffID();
+                if (staffBill.get(idStaff) == null) {
+                    staffBill.put(idStaff, bills.get(in.getInvoiceID()));
+                } else {
+                    int value = staffBill.get(idStaff);
+                    staffBill.put(idStaff, value + bills.get(in.getInvoiceID()));
+                }
+            }
+        }
+
+        List<Map.Entry<String, Integer>> sortedList = new LinkedList<>(staffBill.entrySet());
+        Collections.sort(sortedList, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> s1, Map.Entry<String, Integer> s2) {
+                return s2.getValue().compareTo(s1.getValue());
+            }
+        });
+
+        Map.Entry<String, Integer> firstEntry = sortedList.get(0);
+
+        String id = firstEntry.getKey();
+
+        // System.out.println("Req 5: MaNV: " + id);
+
+        for (Staff s : staffs) {
+            if (id.equals(s.getsID())) {
+                maxStaff = s;
+                break;
+            }
+        }
+
         return maxStaff;
     }
 
