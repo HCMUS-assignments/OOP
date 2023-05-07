@@ -4,7 +4,6 @@
 
 // 2. Hiển thị số tiền thu được sau mỗi ngày (tính đến 23h59)
 
-import package3.*;
 
 public class test {
     public static void main(String[] args) {
@@ -13,10 +12,12 @@ public class test {
         garage.addMotobike("abc","29/10/2019 01:00");
         garage.addMotobike("xyz","30/10/2019 19:00");
 
-        garage.getFeeMotobike("abc","29/10/2019 02:00");
-        garage.getFeeMotobike("xyz","30/10/2019 20:00");
+        System.out.println("Fee | " + garage.getFeeMotobike("abc","29/10/2019 02:00") );
+        System.out.println("Fee | " + garage.getFeeMotobike("xyz","30/10/2019 20:00") );
+        
 
-        garage.calcTotalFeeAtDay("29/10/2019");
-        garage.calcTotalFeeAtDay("30/10/2019");
+        System.out.println("Total fee day | " + garage.calcTotalFeeAtDay("29/10/2019"));
+        System.out.println("Total fee day | " + garage.calcTotalFeeAtDay("30/10/2019"));
+    
     }
 }

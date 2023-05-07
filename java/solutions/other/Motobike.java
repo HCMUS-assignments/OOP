@@ -1,6 +1,3 @@
-package package2;
-
-import package1.Time;
 import java.util.*;
 
 public class Motobike {
@@ -13,11 +10,15 @@ public class Motobike {
     public    Motobike() {
             licensePlate = "";
             fee = 0;
+            timeIn = new Time();
+            timeOut = new Time();
         }
 
 
     public    Motobike(String license, String time) {
             licensePlate = license;
+            timeIn = new Time();
+            timeOut = new Time();
             timeIn.setTime(time);
             fee = 0;
         };

@@ -1,8 +1,3 @@
-
-package package3;
-
-import package2.Motobike;
-
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -12,6 +7,7 @@ public class Garage {
 
     public Garage() {
             totalFee = 0;
+            motobikes = new Vector<Motobike>();
         }
 
     public    void addMotobike(String license, String timeIn) {
@@ -28,6 +24,7 @@ public class Garage {
                     motobikes.get(i).setTimeOut(timeOut);
                     motobikes.get(i).calcFee();
                     totalFee += motobikes.get(i).getFee();
+                    break;
                 }
             }
             return motobikes.get(i).getFee();
