@@ -31,7 +31,7 @@ void MyVector<T>::reserve(int newAlloc) {
     for (int i = 0; i < sz; i++) {
         temp[i] = ptr[i];
     }
-    delete [] ptr;
+    if (ptr != NULL) delete[] ptr;
     ptr = temp;
     capacity = newAlloc;
 }
