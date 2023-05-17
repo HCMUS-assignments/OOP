@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 
@@ -19,7 +20,7 @@ class Phim {
     public:
         // constructors 
         Phim();
-        Phim(char* id, char* name, char* type, char* publisher, int year, int rank);
+        Phim(const char* id, const char* name, const char* type, const char* proceducer, int year, int rank);
         Phim(const Phim& other);
         ~Phim();
 
@@ -43,10 +44,10 @@ class Phim {
         Phim& operator= (const Phim& other);    
 
         // input and output
-        // friend istream& operator>> (istream& is, Phim& phim);
-        // friend ostream& operator<< (ostream& os, Phim& phim);
-        // friend ifstream& operator>> (ifstream& ifs, Phim& phim);
-        // friend ofstream& operator<< (ofstream& ofs, Phim& phim);
+        friend istream& operator>> (istream& is, Phim& phim);
+        friend ostream& operator<< (ostream& os, Phim& phim);
+        friend ifstream& operator>> (ifstream& fin, Phim& phim);
+        friend ofstream& operator<< (ofstream& fout, Phim& phim);
 
 };
 

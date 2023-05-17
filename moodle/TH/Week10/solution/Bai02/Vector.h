@@ -34,6 +34,7 @@ class Vector {
 
         void insert(int pos, const T& element);
         void resize(int sz);
+        void clear();
 
 };
 

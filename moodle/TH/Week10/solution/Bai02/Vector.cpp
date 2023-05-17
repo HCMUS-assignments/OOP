@@ -67,7 +67,7 @@ void Vector<T>::insert(int pos, const T& element) {
             reserve(2 * capacity);
         }
     }
-    for (int i = sz + 1; i > pos; i--) {
+    for (int i = sz ; i > pos; i--) {
         ptr[i] = ptr[i - 1];
     }
     ptr[pos] = element;
@@ -80,11 +80,19 @@ void Vector<T>::resize(int sz) {
     for (int i = 0; i < sz; i++) {
         temp[i] = ptr[i];
     }
-    size = sz;
+    this->sz = sz;
     if (ptr != NULL) delete[] ptr;
     ptr = temp;
 }
 
+template <class T>
+void Vector<T>::clear() {
+    delete[] ptr;
+    ptr = NULL;
+    sz = 0;
+    capacity = 0;
+}
+
 
 #include "Phim.h"
-template class Vector<Phim*>;
+template class Vector<Phim>;

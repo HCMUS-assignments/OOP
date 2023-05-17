@@ -7,7 +7,7 @@
 class QLPhim {
     private:
         // using vector template on Bai 1
-        Vector<Phim*> _dsPhim;
+        Vector<Phim> _dsPhim;
 
     public:
         // methods
@@ -16,7 +16,7 @@ class QLPhim {
 
         // 1. Giả sử danh sách phim đã được sắp xếp tăng dần theo năm sản xuất.
         // Hãy viết phương thức thêm vào 1 phim mà vẫn duy trì thứ tự sau khi thêm
-        void addPhim(Phim* phim);
+        void addPhim(Phim phim);
 
         // 2. Ghi danh sách phim vào tập tin với tên file (ds_phim.dat)
         void writeToFile();
