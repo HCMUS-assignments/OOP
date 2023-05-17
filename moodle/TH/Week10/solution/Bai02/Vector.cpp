@@ -31,7 +31,7 @@ void Vector<T>::reserve(int newAlloc) {
     for (int i = 0; i < sz; i++) {
         temp[i] = ptr[i];
     }
-    delete [] ptr;
+    if (ptr != NULL) delete[] ptr;
     ptr = temp;
     capacity = newAlloc;
 }
@@ -56,6 +56,35 @@ void Vector<T>::print() {
         cout << ptr[i] << " ";
     }
 }
+
+template <class T>
+void Vector<T>::insert(int pos, const T& element) {
+    if (pos < 0 || pos > sz) return;
+    if (capacity == sz) {
+        if (capacity == 0) {
+            reserve(10);
+        } else {
+            reserve(2 * capacity);
+        }
+    }
+    for (int i = sz + 1; i > pos; i--) {
+        ptr[i] = ptr[i - 1];
+    }
+    ptr[pos] = element;
+    sz++;
+}
+
+template <class T>
+void Vector<T>::resize(int sz) {
+    T* temp = new T[sz];
+    for (int i = 0; i < sz; i++) {
+        temp[i] = ptr[i];
+    }
+    size = sz;
+    if (ptr != NULL) delete[] ptr;
+    ptr = temp;
+}
+
 
 #include "Phim.h"
 template class Vector<Phim*>;

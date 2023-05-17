@@ -4,12 +4,12 @@ Phim::Phim() {
     _id = NULL;
     _name = NULL;
     _type = NULL;
-    _publisher = NULL;
+    _proceducer = NULL;
     _year = 0;
     _rank = 0;
 }
 
-Phim::Phim(char *id, char* name, char* type, char* publisher, int year, int rank) {
+Phim::Phim(char *id, char* name, char* type, char* proceducer, int year, int rank) {
     if (strlen(id) != 5) {
         cout << "ID phai co 5 ki tu so" << endl;
         return;
@@ -23,8 +23,8 @@ Phim::Phim(char *id, char* name, char* type, char* publisher, int year, int rank
     _type = new char[strlen(type) + 1];
     strcpy(_type, type);
 
-    _publisher = new char[strlen(publisher) + 1];
-    strcpy(_publisher, publisher);
+    _proceducer = new char[strlen(proceducer) + 1];
+    strcpy(_proceducer, proceducer);
 
     _year = year;
     _rank = rank;
@@ -40,8 +40,8 @@ Phim::Phim(const Phim& other) {
     _type = new char[strlen(other._type) + 1];
     strcpy(_type, other._type);
 
-    _publisher = new char[strlen(other._publisher) + 1];
-    strcpy(_publisher, other._publisher);
+    _proceducer = new char[strlen(other._proceducer) + 1];
+    strcpy(_proceducer, other._proceducer);
 
     _year = other._year;
     _rank = other._rank;
@@ -51,7 +51,7 @@ Phim::~Phim() {
     if (_id != NULL) delete[] _id;
     if (_name != NULL) delete[] _name;
     if (_type != NULL) delete[] _type;
-    if (_publisher != NULL) delete[] _publisher;
+    if (_proceducer != NULL) delete[] _proceducer;
 }
 
 char* Phim::getId() {
@@ -66,8 +66,8 @@ char* Phim::getType() {
     return _type;
 }
 
-char* Phim::getPublisher() {
-    return _publisher;
+char* Phim::getProceducer() {
+    return _proceducer;
 }
 
 int Phim::getYear() {
@@ -100,10 +100,10 @@ void Phim::setType(char* type) {
     strcpy(_type, type);
 }
 
-void Phim::setPublisher(char* publisher) {
-    if (_publisher != NULL) delete[] _publisher;
-    _publisher = new char[strlen(publisher) + 1];
-    strcpy(_publisher, publisher);
+void Phim::setProceducer(char* proceducer) {
+    if (_proceducer != NULL) delete[] _proceducer;
+    _proceducer = new char[strlen(proceducer) + 1];
+    strcpy(_proceducer, proceducer);
 }
 
 void Phim::setYear(int year) {
@@ -127,9 +127,9 @@ Phim& Phim::operator= (const Phim& other) {
     _type = new char[strlen(other._type) + 1];
     strcpy(_type, other._type);
 
-    if (_publisher != NULL) delete[] _publisher;
-    _publisher = new char[strlen(other._publisher) + 1];
-    strcpy(_publisher, other._publisher);
+    if (_proceducer != NULL) delete[] _proceducer;
+    _proceducer = new char[strlen(other._proceducer) + 1];
+    strcpy(_proceducer, other._proceducer);
 
     _year = other._year;
     _rank = other._rank;

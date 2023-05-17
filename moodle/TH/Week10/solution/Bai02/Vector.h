@@ -28,6 +28,13 @@ class Vector {
         // input and output
         void push(const T& element);
         void print();
+
+        // getter
+        int size() { return sz; }
+
+        void insert(int pos, const T& element);
+        void resize(int sz);
+
 };
 
 #endif
